@@ -15,8 +15,8 @@ BookSwap es una plataforma web que permite a los usuarios intercambiar libros f�
 --- 
 ## Usuarios y funcionalidades 
 
-**Visitantes (no registrados)**: Pueden explorar los libros disponibles en su área mediante un buscador por título, autor o género.
-**Usuarios registrados**: Pueden publicar libros que desean intercambiar, contactar con otros usuarios para acordar intercambios y dejar reseñas sobre los libros recibidos.
-**Bibliotecas asociadas**: Pueden publicar libros gratuitos disponibles para la comunidad y anunciar eventos de lectura.
-**Administrador**: Supervisa las publicaciones para evitar contenido inadecuado, gestiona usuarios y mantiene la plataforma segura.
+- **Visitantes (no registrados)**: Pueden explorar los libros disponibles en su área mediante un buscador por título, autor o género.
+- **Usuarios registrados**: Pueden publicar libros que desean intercambiar, contactar con otros usuarios para acordar intercambios y dejar reseñas sobre los libros recibidos.
+- **Bibliotecas asociadas**: Pueden publicar libros gratuitos disponibles para la comunidad y anunciar eventos de lectura.
+- **Administrador**: Supervisa las publicaciones para evitar contenido inadecuado, gestiona usuarios y mantiene la plataforma segura.
 
