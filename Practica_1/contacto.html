@@ -14,5 +14,33 @@
       <p><a href="bocetos.html"> Bocetos de las vistas.</a></p>
       <p><a href="planificacion.html"> Planificación del trabajo.</a></p>
     </div>
+    <form action="mailto:ismaluca@ucm.es" method="post" enctype="text/plain">
+      
+      <h3>Nombre: 
+      <input type="text" name="Nombre" size="20"> </h3>
+
+      <h3>Correo: 
+      <input type="email" name="Email" size="20"> </h3>
+
+      <h3>Motivo de la consulta:</h3>
+        <input type="radio" id="evaluacion" name="Motivo" value="Evaluacion">
+        <label for="evaluacion">Evaluacion</label><br>
+        <input type="radio" id="sugerencias" name="Motivo" value="Sugerencias">
+        <label for="sugerencias">Sugerencias</label><br>
+        <input type="radio" id="criticas" name="Motivo" value="Críticas">
+        <label for="criticas">Críticas</label><br>
+
+      <h3>Escriba su consulta: 
+        <input type="text" name="Consulta" size="50"> </h3>
+
+      <p><input type="checkbox" name="Checkbox" id="checkbox" value="Aceptada"> 
+      <label for="checkbox">Marque esta casilla para verificar que ha leído 
+        nuestros términos y condiciones del servicio
+      </label></p>  
+
+      <button type="submit" id="enviar">ENVIAR</button>
+
+    </form>
+
   </body>
 </html>
