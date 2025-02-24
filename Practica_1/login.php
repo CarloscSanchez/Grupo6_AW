@@ -23,6 +23,13 @@
 
             <!-- Enviar formulario -->
             <button type="submit" class="btn-login">Login</button>
+
+            <?php
+            // Mensaje de error si el login falla
+            if (isset($_GET['error']) && $_GET['error'] === "1") {
+                echo "<p style='color: red;'>Usuario o contraseña incorrectos.</p>";
+            }
+            ?>
         </form>
 
         <div class="extra-links">
