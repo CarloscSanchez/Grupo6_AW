@@ -1,24 +1,19 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="img/logo_icono.ico" type="image/x-icon">  <!-- Link para cambiar el icono de favicon-->
+    <link rel="stylesheet" href="CSS/estilos.css"> <!-- Archivo CSS externo -->
     <title>Miembros</title>
   </head>
 
-  <body><!--Enlaces para las otras paginas-->
-    <div id="enlaces" >
-      <h2>Enlaces a las demás páginas</h2>
-      <ul>
-        <li><a href="index.html"> Página de inicio.</a></li>
-        <li><a href="detalles.html"> Más detalles de la aplicación.</a></li>
-        <li><a href="contacto.html"> ¡Contacta con nosotros!</a></li>
-        <li><a href="bocetos.html"> Bocetos de las vistas.</a></li>
-        <li><a href="planificacion.html"> Planificación del trabajo.</a></li>
-      </ul>
-      
-    </div>
-
+  <?php include 'inlcudes/vistas/comun/navbar.php'; ?>
 
     <h1>¿Quiénes somos?</h1>
     <p>Aquí puedes conocer a los miembros de nuestro equipo.</p>

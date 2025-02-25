@@ -1,23 +1,22 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="img/logo_icono.ico" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/estilos.css"> <!-- Archivo CSS externo -->
     <title>Contacto</title>
   </head>
   <body>
-    <!--Enlaces a las otras páginas-->
-    <div id="enlaces" >
-      <h2>Enlaces a las demás páginas</h2>
-      <ul>
-        <li><a href="index.html"> Página de inicio.</a></li>
-        <li><a href="detalles.html"> Más detalles de la aplicación.</a></li>
-        <li><a href="miembros.html"> Conoce más sobre nosotros.</a></li>
-        <li><a href="bocetos.html"> Bocetos de las vistas.</a></li>
-        <li><a href="planificacion.html"> Planificación del trabajo.</a></li>
-      </ul>
-      
-    </div>
+
+        <!-- Incluir el archivo navbar.php -->
+    <?php include 'inlcudes/vistas/comun/navbar.php'; ?>
+
     <!--Formulario para rellenar que se envia a un correo-->
     <form action="mailto:ismaluca@ucm.es" method="post" enctype="text/plain">
       
