@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <div class="navbar">
     <!-- Sección izquierda: Logo + Nombre de la app -->
     <div class="navbar-left">
@@ -27,7 +32,7 @@
         <?php else: ?>
             <!-- Si el usuario está logueado, muestra LogOut y el ícono del perfil -->
             <a href="perfil.php" class="nav-item">
-                <img src="img/carlos.jpg" alt="Perfil" class="profile-icon">
+                <img src="img/logo5_AW.jpg" alt="Perfil" class="profile-icon">
             </a>
             <a href="logout.php" class="nav-item">Log Out</a>
         <?php endif; ?>
