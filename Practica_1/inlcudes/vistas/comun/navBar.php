@@ -34,7 +34,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <a href="perfil.php" class="nav-item">
                 <img src="img/logo5_AW.jpg" alt="Perfil" class="profile-icon">
             </a>
-            <a href="logout.php" class="nav-item">Log Out</a>
+            <a href="procesar_logout.php" class="nav-item">Log Out</a>
         <?php endif; ?>
     </div>
 </div>
