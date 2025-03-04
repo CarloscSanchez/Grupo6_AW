@@ -14,7 +14,7 @@ if ($conn->connect_errno) {
     die("Error de conexión a la base de datos: " . $conn->connect_error);
 }
 
-// Verificar si se ha enviado el formulario
+// Verificar si se ha enviado via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $nombre = $_SESSION['usuario'];
@@ -29,21 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check->bind_result($idUsuario); 
     $check->fetch();    
     $check->close();
-
-
-    // Obtener el ID del usuario
-    $checkUser = $conn->prepare("SELECT idUsuario FROM usuarios WHERE nombre = ?");
-    if (!$checkUser) {
-        die("Error en la preparación de la consulta: " . $conn->error);
-    }
-
-    $checkUser->bind_param("s", $nombre);
-    $checkUser->execute();
-    $checkUser->store_result();
-
-    if ($checkUser->num_rows === 0) {
-        die("Usuario no encontrado.");
-    }
 
     // Verificar que el libro pertenece al usuario antes de eliminarlo
     $checkLibro = $conn->prepare("SELECT idLibro FROM libros WHERE idLibro = ? AND idUsuario = ?");
