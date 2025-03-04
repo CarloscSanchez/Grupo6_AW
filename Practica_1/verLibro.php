@@ -65,7 +65,7 @@
         // Función para confirmar el borrado de un libro
         function confirmarBorrado(id) {
             if (confirm("¿Estás seguro de que quieres borrar este libro?")) {
-                window.location.href = 'borrarLibro.php?id=' + id;
+                window.location.href = 'procesar_borrado.php?id=' + id;
             }
         }
     </script>
