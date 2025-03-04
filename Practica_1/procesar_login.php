@@ -3,34 +3,48 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$usuarios_validos = [
-    "user" => ["password" => "userpass", "nombre" => "Usuario"],
-    "admin" => ["password" => "adminpass", "nombre" => "Administrador", "esAdmin" => true]
-];
 
-// Obtener los datos del formulario
-$username = isset($_POST['usuario']) ? trim($_POST['usuario']) : "";
-$password = isset($_POST['password']) ? trim($_POST['password']) : "";
+// Incluir la configuración de la base de datos
+include 'config.php';
 
+// Crear la conexión
+$conn = new mysqli(BD_HOST, BD_USER, BD_PASS, BD_NAME);
 
-// Verificar si el usuario es válido
-if (array_key_exists($username, $usuarios_validos) && $usuarios_validos[$username]['password'] === $password) {
-    // Iniciar sesión con los datos del usuario
-    $_SESSION['login'] = true;
-    $_SESSION['usuario'] = $usuarios_validos[$username]['nombre'];
-
-    // Si es administrador, agregar variable adicional
-    if (isset($usuarios_validos[$username]['esAdmin'])) {
-        $_SESSION['esAdmin'] = true;
-    }
-
-    // Redirigir a la página principal con sesión iniciada     
-    header("Location: index.php");
-    exit();
-} else {
-    // Redirigir a login.php con mensaje de error
-    header("Location: login.php?error=1");
-    exit();
+// Verificar la conexión
+if ($conn->connect_errno) {
+    die("Error de conexión a la base de datos: " . $conn->connect_error);
 }
 
+
+// Obtener los datos del formulario
+
+$username = isset($_POST['usuario']) ? trim($_POST['usuario']) : "";
+$password = isset($_POST['password']) ? trim($_POST['password']) : "";
+/*
+$sql = "SELECT nombre, contraseña FROM usuarios WHERE nombre = '$username';"
+$result = $conn->query($sql);*/
+// Evitar inyección SQL con consultas preparadas, al principio lo hice con ->query y no funciono
+$stmt = $conn->prepare("SELECT nombre, contraseña FROM usuarios WHERE nombre = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if($result->num_rows > 0){
+    $row = $result->fetch_assoc();//en un array
+    if(password_verify($password, $row['contraseña'])){//comprobamos los hashes
+        $_SESSION['login'] = true;
+        $_SESSION['usuario'] = $row['nombre'];
+        header("Location: index.php");
+        exit();
+    }
+}
+
+// Redirigir en caso de error
+header("Location: login.php?error=1");
+exit();
+
+$conn->close();
 ?>
+
+
+
