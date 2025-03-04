@@ -8,11 +8,16 @@
     
 </head>
 <body>
+    
+    <!-- Incluir la barra de navegación -->
+    
+    <?php include 'includes/vistas/comun/navBar.php'; ?>
+
     <div class="body-subirLibro">
         <div class="form-container">
             <h2>Subir un libro</h2>
         
-            <form action="procesarSubidaLibro.php" method="post" enctype="multipart/form-data">
+            <form action="procesar_libro.php" method="post" enctype="multipart/form-data">
                 <!-- Título -->
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" required>
@@ -25,15 +30,34 @@
                 <label for="genero">Género:</label>
                 <select id="genero" name="genero" required>
                     <option value="">Selecciona un género</option>
-                    <option value="Ficción">Ficción</option>
-                    <option value="No ficción">No ficción</option>
+                    <option value="Poesía">Poesía</option>
+                    <option value="Aventuras">Aventuras</option>
                     <option value="Ciencia ficción">Ciencia ficción</option>
                     <option value="Romance">Romance</option>
                     <option value="Misterio">Misterio</option>
                     <option value="Fantasía">Fantasía</option>
                     <option value="Histórico">Histórico</option>
+                    <option value="Terror">Terror</option>
                     <option value="Biografía">Biografía</option>
                 </select>
+
+                <!-- Estado -->
+                <label for="estado">Estado:</label>
+                <select id="estado" name="estado">
+                    <option value="">Selecciona un estado</option>
+                    <option value="nuevo">Nuevo</option>
+                    <option value="bueno">Bueno</option>
+                    <option value="aceptable">Aceptable</option>
+                    <option value="deteriorado">Deteriorado</option>
+                </select>
+
+                <!-- Idioma -->
+                <label for="idioma">Idioma:</label>
+                <input type="text" id="idioma" name="idioma">
+
+                <!-- Descripcion -->
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion">
 
                 <!-- Editorial -->
                 <label for="editorial">Editorial:</label>

@@ -17,6 +17,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- Incluir la barra de navegación -->
     
     <?php include 'includes/vistas/comun/navBar.php'; ?>
+    
 
     <h1>BookSwap - Comparte y descubre libros cerca de ti</h1>
 
@@ -25,6 +26,9 @@ if (session_status() === PHP_SESSION_NONE) {
         contacta con otros lectores y da una nueva vida a tus historias favoritas.
         ¡Únete a nuestra comunidad y empieza a compartir lectura hoy mismo!
     </p>
+
+    
+    <li><a href="subirLibro.php">Subir libro</a></li>
 
     <!-- Imagen del logo de la aplicación -->
     <img src="img/logo5_AW.jpg" alt="Logo aplicación" width="350" height="350" style="border-radius: 35%;">

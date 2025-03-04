@@ -50,6 +50,7 @@ CREATE TABLE `libros` (
   `titulo` varchar(255) NOT NULL,
   `autor` varchar(255) NOT NULL,
   `genero` varchar(100) NOT NULL,
+  `editorial` varchar(100) NOT NULL,
   `idioma` varchar(100) DEFAULT NULL,
   `estado` enum('nuevo','bueno','aceptable','deteriorado') DEFAULT 'bueno',
   `descripcion` text DEFAULT NULL,
