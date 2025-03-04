@@ -9,7 +9,7 @@
 <body>
 
     <!-- Incluir la barra de navegación -->
-    <?php include 'inlcudes/vistas/comun/navbar.php'; ?>
+    <?php include 'includes/vistas/comun/navbar.php'; ?>
     
     <div class="login-body">
         <div class="login-container">

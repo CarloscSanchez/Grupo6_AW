@@ -16,7 +16,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <!-- Incluir la barra de navegación -->
     
-    <?php include 'inlcudes/vistas/comun/navBar.php'; ?>
+    <?php include 'includes/vistas/comun/navBar.php'; ?>
 
     <h1>BookSwap - Comparte y descubre libros cerca de ti</h1>
 

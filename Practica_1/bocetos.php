@@ -15,7 +15,7 @@ if (session_status() === PHP_SESSION_NONE) {
   </head>
   <body>
 
-  <?php include 'inlcudes/vistas/comun/navbar.php'; ?>
+  <?php include 'includes/vistas/comun/navbar.php'; ?>
 
     <div id="fotos">
       <!-- Aquí las imagenes, todas ajustadas para tener la misma anchura. Al ser la misma proporción, la altura será igual también-->

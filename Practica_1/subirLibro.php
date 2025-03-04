@@ -12,7 +12,7 @@
         <div class="form-container">
             <h2>Subir un libro</h2>
         
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="procesarSubidaLibro.php" method="post" enctype="multipart/form-data">
                 <!-- Título -->
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" required>

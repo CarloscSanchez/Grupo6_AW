@@ -19,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <p>Plan de desarrollo del proyecto con fechas y distribución de tareas</p>
 </header>
 
-<?php include 'inlcudes/vistas/comun/navbar.php'; ?>
+<?php include 'includes/vistas/comun/navbar.php'; ?>
 
 <!-- Texto de introducción -->
 <section class="descripción">

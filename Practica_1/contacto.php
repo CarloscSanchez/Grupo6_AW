@@ -15,7 +15,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <body>
 
         <!-- Incluir el archivo navbar.php -->
-    <?php include 'inlcudes/vistas/comun/navbar.php'; ?>
+    <?php include 'includes/vistas/comun/navbar.php'; ?>
 
     <!--Formulario para rellenar que se envia a un correo-->
     <form action="mailto:ismaluca@ucm.es" method="post" enctype="text/plain">

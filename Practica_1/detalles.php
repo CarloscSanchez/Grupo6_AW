@@ -13,7 +13,7 @@ session_start(); // Iniciar sesión para manejar el login si es necesario
   <body>
 
     <!-- Incluir el archivo navbar.php -->
-    <?php include 'inlcudes/vistas/comun/navbar.php'; ?>
+    <?php include 'includes/vistas/comun/navbar.php'; ?>
 
 
     <h1>Introducción</h1><!-- Aquí viene indicada una pequeña introducción a nuestra plataforma -->

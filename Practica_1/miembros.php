@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <title>Miembros</title>
   </head>
 
-  <?php include 'inlcudes/vistas/comun/navbar.php'; ?>
+  <?php include 'includes/vistas/comun/navbar.php'; ?>
 
     <h1>¿Quiénes somos?</h1>
     <p>Aquí puedes conocer a los miembros de nuestro equipo.</p>
