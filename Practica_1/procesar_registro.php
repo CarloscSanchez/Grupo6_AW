@@ -1,4 +1,6 @@
 <?php
+session_start(); 
+
 // Incluir la configuración de la base de datos
 include 'config.php';
 
@@ -61,7 +63,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sss", $nombre, $correo, $passwordHash);
 
     if ($stmt->execute()) {
-        echo "Registro exitoso. <a href='login.php'>Inicia sesión</a>";
+        //echo "Registro exitoso. <a href='login.php'>Inicia sesión</a>";
+        $_SESSION['login'] = true;//Para que se quede iniciada la sesion al registrarse
+        $_SESSION['usuario'] = $nombre;
+        header("Location: index.php");
+        exit();
     } else {
         echo "Error al registrar. Por favor, intenta nuevamente. Detalles: " . $stmt->error;
     }
