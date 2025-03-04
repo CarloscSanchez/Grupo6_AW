@@ -17,7 +17,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- Incluir la barra de navegación -->
     
     <?php include 'includes/vistas/comun/navBar.php'; ?>
-    
+
 
     <h1>BookSwap - Comparte y descubre libros cerca de ti</h1>
 
@@ -28,7 +28,6 @@ if (session_status() === PHP_SESSION_NONE) {
     </p>
 
     
-    <li><a href="subirLibro.php">Subir libro</a></li>
 
     <!-- Imagen del logo de la aplicación -->
     <img src="img/logo5_AW.jpg" alt="Logo aplicación" width="350" height="350" style="border-radius: 35%;">
