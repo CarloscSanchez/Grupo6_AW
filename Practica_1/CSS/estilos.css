@@ -434,3 +434,21 @@ body .login-body{
 .acciones .intercambiar:hover{
     background-color: #6a2297;
 }
+
+.hero {
+    background-image: url('../img/fondo_index.jpeg');
+    background-size: cover;
+    color: #8cbdeec2;
+    text-align: center;
+    padding: 50px px;
+}
+.hero h1 {
+    font-size: 3em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.hero p {
+    font-size: 1.2em;
+    margin: 10px 0 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}

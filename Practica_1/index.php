@@ -26,9 +26,6 @@ if(isset($_SESSION['usuario'])){
     $id_usuario = 0;
 }
 
-
-
-
 // Consulta para obtener los libros publicados por el usuario
 $libros_publicados = [];
 $sql = "SELECT * FROM libros LEFT JOIN usuarios ON usuarios.idUsuario = libros.idpropietario WHERE idpropietario != ?";
@@ -55,21 +52,18 @@ $conn->close();  // Cerrar la conexión
     <title>BookSwap</title>
 </head>
 <body>
-
     <!-- Incluir la barra de navegación -->
-    
     <?php include 'includes/vistas/comun/navBar.php'; ?>
 
+    <div class="hero">
+        <h1>BookSwap - Comparte y descubre libros cerca de ti</h1>
+        <p>
+            Intercambia libros físicos de forma fácil y gratuita. Busca títulos en tu área,
+            contacta con otros lectores y da una nueva vida a tus historias favoritas.
+            ¡Únete a nuestra comunidad y empieza a compartir lectura hoy mismo!
+        </p>
+    </div>
 
-    <h1>BookSwap - Comparte y descubre libros cerca de ti</h1>
-
-    <p>
-        Intercambia libros físicos de forma fácil y gratuita. Busca títulos en tu área,
-        contacta con otros lectores y da una nueva vida a tus historias favoritas.
-        ¡Únete a nuestra comunidad y empieza a compartir lectura hoy mismo!
-    </p>
-
-    
     <!-- Contenido de las pestañas -->
     <div id="libros" class="tab-content active">
         <div class="libros-publicados">
@@ -80,8 +74,8 @@ $conn->close();  // Cerrar la conexión
                 <div class="card" onclick="window.location.href=\'verLibro.php?id=' . $libro["idlibro"] . '\'">
                     <img src="' . $libro["imagen"] . '" alt="' . $libro["titulo"] . '">
                     <h3>' . $libro["titulo"] . '</h3>
-                    <p>Autor:' . $libro["autor"] . '</p>
-                    <p>Propietario:' . $libro["nombre"] . '</p>
+                    <p>Autor: ' . $libro["autor"] . '</p>
+                    <p>Propietario: ' . $libro["nombre"] . '</p>
                     <div class="generos">';
                     echo '<span>' . $libro["genero"] . '</span>';
                     echo '</div>
@@ -89,7 +83,7 @@ $conn->close();  // Cerrar la conexión
             }                        
             ?>                        
         </div>
-
+    </div>
 
 </body>
 </html>
