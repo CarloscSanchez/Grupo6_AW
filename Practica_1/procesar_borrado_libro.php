@@ -14,9 +14,9 @@ if ($conn->connect_errno) {
     die("Error de conexión a la base de datos: " . $conn->connect_error);
 }
 
-// Verificar si se ha enviado via POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
     $nombre = $_SESSION['usuario'];
 
     $check = $conn->prepare("SELECT idUsuario FROM usuarios WHERE nombre = ?");
@@ -31,12 +31,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check->close();
 
     // Verificar que el libro pertenece al usuario antes de eliminarlo
-    $checkLibro = $conn->prepare("SELECT idLibro FROM libros WHERE idLibro = ? AND idUsuario = ?");
+    $checkLibro = $conn->prepare("SELECT idLibro FROM libros WHERE idLibro = ? AND idpropietario = ?");
     if (!$checkLibro) {
         die("Error en la preparación de la consulta: " . $conn->error);
     }
 
-    $checkLibro->bind_param("ii", $_POST["id"], $idUsuario);
+    $checkLibro->bind_param("ii", $id , $idUsuario);
     $checkLibro->execute();
     $checkLibro->store_result();
 
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$stmt) {
         die("Error en la preparación del borrado: " . $conn->error);
     }
-    $stmt->bind_param("s", $_POST["id"]);
+    $stmt->bind_param("s", $id);
 
 
     if ($stmt->execute()) {
@@ -62,10 +62,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->close();
     $conn->close();
-} else {
-    echo "Método de solicitud no válido.";
+
+    
+    header("Location: perfil.php");
+    exit();
+} else{
+    die("Error: No se ha proporcionado un ID de libro.");
 }
 
-header("Location: index.php");
-exit();
 ?>

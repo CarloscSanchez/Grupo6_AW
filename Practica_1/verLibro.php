@@ -1,5 +1,8 @@
 <?php
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Incluir la configuración de la base de datos
 include 'config.php';
@@ -36,6 +39,7 @@ if ($id_libro) {
     <div class="body-verLibro">
         <div class="libro-container">
             <?php
+
             // Verificar si se ha encontrado el libro
             if ($libro) {
                 // Mostrar la información del libro
@@ -47,14 +51,27 @@ if ($id_libro) {
                 <p>' . $libro["descripcion"] . '</p>
                 <div class="generos">';
                 echo '<span>' . $libro["genero"] . '</span>';
-                echo '</div>
-                <div class="acciones">
-                    <button class="editar" onclick="window.location.href=\'editarLibro.php?id=' . $libro["idlibro"] . '\'">Editar</button>
-                    <button class="borrar" onclick="confirmarBorrado(' . $libro["idlibro"] . ')">Borrar</button>
-                </div>';
+                if(isset($_SESSION['usuario'])){
+                    if($libro["nombre"] == $_SESSION['usuario']){
+                        echo '</div>
+                        <div class="acciones">
+                            <button class="editar" onclick="window.location.href=\'editarLibro.php?id=' . $libro["idlibro"] . '\'">Editar</button>
+                            <button class="borrar" onclick="window.location.href=\'procesar_borrado_libro.php?id=' . $libro["idlibro"] . '\'">Borrar</button>
+                        </div>';
+                    } else {
+                        echo '</div>
+                        <div class="acciones">
+                            <button class="intercambiar" onclick="window.location.href=\'intercambiarLibro.php?id=' . $libro["idlibro"] . '\'">Intercambiar</button>
+                        </div>';
+                    }
+                } else {
+                    echo '<p>No puedes intercambiar un libro si no has iniciado sesión</p>';
+                }
+                
             } else {
                 echo '<p>Libro no encontrado.</p>';
             }
+
             ?>
         </div>
     </div>

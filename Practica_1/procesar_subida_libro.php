@@ -77,8 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: perfil.php");
         exit();
     } else {
-        header("Location: login.php?error=1");
-        exit();
+        die("Error al subir el libro. Detalles: " . $stmt->error);
     }
 
     $stmt->close();
