@@ -78,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } else {
         header("Location: login.php?error=1");
+        exit();
     }
 
     $stmt->close();
@@ -86,5 +87,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Método de solicitud no válido.";
 }
 
-header("Location: index.php");
 ?>

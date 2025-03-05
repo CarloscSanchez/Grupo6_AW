@@ -1,3 +1,29 @@
+<?php
+session_start();
+
+// Incluir la configuración de la base de datos
+include 'config.php';
+
+// Crear la conexión
+$conn = new mysqli(BD_HOST, BD_USER, BD_PASS, BD_NAME);
+
+// Verificar la conexión
+if ($conn->connect_errno) {
+    die("Error de conexión a la base de datos: " . $conn->connect_error);
+}
+
+$id_libro = $_GET["id"] ?? null;
+$libro = null;
+
+// Consulta para obtener el libro
+if ($id_libro) {
+    $stmt = $conn->prepare("SELECT * FROM libros WHERE idlibro = ?");
+    $stmt->bind_param("i", $id_libro);
+    $stmt->execute();
+    $libro = $stmt->get_result()->fetch_assoc();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,48 +36,20 @@
     <div class="body-verLibro">
         <div class="libro-container">
             <?php
-            // Simulación de datos del libro (en un caso real, esto vendría de una base de datos)
-            $libros = [
-                1 => [
-                    "titulo" => "Cien años de soledad",
-                    "autor" => "Gabriel García Márquez",
-                    "descripcion" => "Una obra maestra del realismo mágico que narra la historia de la familia Buendía en Macondo.",
-                    "generos" => ["Ficción", "Realismo mágico"],
-                    "imagen" => "https://via.placeholder.com/300x200?text=Cien+años+de+soledad"
-                ],
-                2 => [
-                    "titulo" => "1984",
-                    "autor" => "George Orwell",
-                    "descripcion" => "Una distopía clásica que explora temas de vigilancia y control estatal.",
-                    "generos" => ["Ciencia ficción", "Distopía"],
-                    "imagen" => "https://via.placeholder.com/300x200?text=1984"
-                ],
-                3 => [
-                    "titulo" => "Orgullo y prejuicio",
-                    "autor" => "Jane Austen",
-                    "descripcion" => "Una novela romántica que sigue la historia de Elizabeth Bennet y el señor Darcy.",
-                    "generos" => ["Romance", "Clásico"],
-                    "imagen" => "https://via.placeholder.com/300x200?text=Orgullo+y+prejuicio"
-                ]
-            ];
-
-            // Obtener el ID del libro desde la URL
-            $id = $_GET["id"] ?? null;
-            if ($id && isset($libros[$id])) {
-                $libro = $libros[$id];
+            // Verificar si se ha encontrado el libro
+            if ($libro) {
+                // Mostrar la información del libro
                 echo '
                 <img src="' . $libro["imagen"] . '" alt="' . $libro["titulo"] . '">
                 <h1>' . $libro["titulo"] . '</h1>
                 <p><strong>Autor:</strong> ' . $libro["autor"] . '</p>
                 <p>' . $libro["descripcion"] . '</p>
                 <div class="generos">';
-                foreach ($libro["generos"] as $genero) {
-                    echo '<span>' . $genero . '</span>';
-                }
+                echo '<span>' . $libro["genero"] . '</span>';
                 echo '</div>
                 <div class="acciones">
-                    <button class="editar" onclick="window.location.href=\'editarLibro.php?id=' . $id . '\'">Editar</button>
-                    <button class="borrar" onclick="confirmarBorrado(' . $id . ')">Borrar</button>
+                    <button class="editar" onclick="window.location.href=\'editarLibro.php?id=' . $libro["idlibro"] . '\'">Editar</button>
+                    <button class="borrar" onclick="confirmarBorrado(' . $libro["idlibro"] . ')">Borrar</button>
                 </div>';
             } else {
                 echo '<p>Libro no encontrado.</p>';
@@ -60,12 +58,11 @@
         </div>
     </div>
     
-
     <script>
         // Función para confirmar el borrado de un libro
         function confirmarBorrado(id) {
             if (confirm("¿Estás seguro de que quieres borrar este libro?")) {
-                window.location.href = 'procesar_borrado.php?id=' + id;
+                window.location.href = 'procesar_borrado_libro.php?id=' + id;
             }
         }
     </script>
