@@ -43,14 +43,20 @@ if ($id_libro) {
             // Verificar si se ha encontrado el libro
             if ($libro) {
                 // Mostrar la información del libro
-                echo '
+                echo ' <div class="libro">
                 <img src="' . $libro["imagen"] . '" alt="' . $libro["titulo"] . '">
                 <h1>' . $libro["titulo"] . '</h1>
                 <p><strong>Autor:</strong> ' . $libro["autor"] . '</p>
                 <p><strong>Propietario:</strong>' . $libro["nombre"] . '</p>
                 <p>' . $libro["descripcion"] . '</p>
                 <div class="generos">';
-                echo '<span>' . $libro["genero"] . '</span>';
+                echo '<span> Género: ' . $libro["genero"] . '</span>'
+                . '<span> Editorial: ' . $libro["editorial"] . '</span>'
+                . '<span> Estado: ' . $libro["estado"] . '</span>'
+                . '<span> Idioma: ' . $libro["idioma"] . '</span>';
+
+
+                // Mostrar las distintas acciones según el usuario que esté viendo el libro
                 if(isset($_SESSION['usuario'])){
                     if($libro["nombre"] == $_SESSION['usuario']){
                         echo '</div>
@@ -75,6 +81,7 @@ if ($id_libro) {
             ?>
         </div>
     </div>
+    
     
     <script>
         // Función para confirmar el borrado de un libro

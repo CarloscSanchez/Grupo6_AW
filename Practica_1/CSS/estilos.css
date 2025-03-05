@@ -425,3 +425,12 @@ body .login-body{
 .acciones .borrar:hover {
     background-color: #c82333;
 }
+
+.acciones .intercambiar {
+    background-color: #9c28e3;
+    color: white;
+}
+
+.acciones .intercambiar:hover{
+    background-color: #6a2297;
+}
