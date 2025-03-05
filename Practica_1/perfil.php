@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $usuario = $_SESSION['usuario'];  // Obtener el ID del usuario de la sesión
 
@@ -71,7 +73,7 @@ $conn->close();  // Cerrar la conexión
                     <button onclick="mostrarTab('enviados')">Intercambios enviados</button>
                 </div>
 
-                <!-- Contenido de las pestañas (generado forzadamente para ver como quedaría)-->
+                <!-- Contenido de las pestañas -->
                 <div id="libros" class="tab-content active">
                     <div class="libros-publicados">
                         <?php
@@ -86,8 +88,8 @@ $conn->close();  // Cerrar la conexión
                                 echo '<span>' . $libro["genero"] . '</span>';
                                 echo '</div>
                             </div>';
-                        }
-                        ?>
+                        }                        
+                        ?>                        
                     </div>
                     <!-- Botón para subir libro -->
                     <button class="btn-subir-libro" onclick="window.location.href='subirLibro.php'">Subir Libro</button>
