@@ -4,23 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/estilos.css"> <!-- Archivo CSS externo -->
-    <title>Subir un libro</title>
+    <title>Editar un libro</title>
     
 </head>
 <body>
-    
     <!-- Incluir la barra de navegación -->
-    
     <?php include 'includes/vistas/comun/navBar.php'; ?>
+    
+    <?php $id = isset($_GET['id']) ? $_GET['id'] : '';  // Obtener el id del libro a editar  ?>
 
     <div class="body-subirLibro">
         <div class="form-container">
             <h2>Edita tu libro</h2>
-        
-            <?php
-                $id = isset($_GET['id']) ? $_GET['id'] : '';
-            ?>
-
+            
+            <!-- Formulario para subir un libro -->
             <form action="procesar_editar_libro.php?id=<?php echo htmlspecialchars($id); ?>" method="post" enctype="multipart/form-data">
                 <!-- Título -->
                 <label for="titulo">Título:</label>
@@ -71,7 +68,6 @@
 
                 <!-- Botón de actualizar -->
                 <button class="btn-submit" type="submit">Actualizar libro</button>
-
                 <button class="btn-cancel" type="button" onclick="window.location.href='perfil.php'">Cancelar</button>
             </form>            
         </div>

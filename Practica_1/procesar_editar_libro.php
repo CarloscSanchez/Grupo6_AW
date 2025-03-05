@@ -49,12 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check->close();
 
 
-    // Verificar que el libro pertenece al usuario antes de eliminarlo
+    // Verificar que el libro pertenece al usuario antes de editarlo
     $checkLibro = $conn->prepare("SELECT idLibro FROM libros WHERE idLibro = ? AND idpropietario = ?");
     if (!$checkLibro) {
         die("Error en la preparación de la consulta: " . $conn->error);
     }
 
+    // Obtener el id del libro que se va a editar
+    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
     $checkLibro->bind_param("ii", $id , $idUsuario);
     $checkLibro->execute();
     $checkLibro->store_result();
@@ -65,9 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $checkLibro->close();
 
-
-// Preparar la consulta para actualizar el libro
-    $stmt = $conn->prepare("UPDATE libros SET titulo = ?, autor = ?, genero = ?, editorial = ?, idioma = ?, descripcion = ? WHERE idLibro = $id");
+    // Preparar la consulta para actualizar el libro
+    $stmt = $conn->prepare("UPDATE libros SET titulo = ?, autor = ?, genero = ?, editorial = ?, idioma = ?, descripcion = ?, estado = ? WHERE idLibro = $id");
     if (!$stmt) {
         die("Error en la preparación de la consulta: " . $conn->error);
     }
