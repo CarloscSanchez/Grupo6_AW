@@ -17,7 +17,7 @@ $libro = null;
 
 // Consulta para obtener el libro
 if ($id_libro) {
-    $stmt = $conn->prepare("SELECT * FROM libros WHERE idlibro = ?");
+    $stmt = $conn->prepare("SELECT * FROM libros LEFT JOIN usuarios ON usuarios.idUsuario = libros.idpropietario  WHERE idlibro = ?");
     $stmt->bind_param("i", $id_libro);
     $stmt->execute();
     $libro = $stmt->get_result()->fetch_assoc();
@@ -43,6 +43,7 @@ if ($id_libro) {
                 <img src="' . $libro["imagen"] . '" alt="' . $libro["titulo"] . '">
                 <h1>' . $libro["titulo"] . '</h1>
                 <p><strong>Autor:</strong> ' . $libro["autor"] . '</p>
+                <p><strong>Propietario:</strong>' . $libro["nombre"] . '</p>
                 <p>' . $libro["descripcion"] . '</p>
                 <div class="generos">';
                 echo '<span>' . $libro["genero"] . '</span>';
