@@ -63,13 +63,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sss", $nombre, $correo, $passwordHash);
 
     if ($stmt->execute()) {
-        //echo "Registro exitoso. <a href='login.php'>Inicia sesión</a>";
         $_SESSION['login'] = true;//Para que se quede iniciada la sesion al registrarse
         $_SESSION['usuario'] = $nombre;
         header("Location: index.php");
         exit();
     } else {
-        echo "Error al registrar. Por favor, intenta nuevamente. Detalles: " . $stmt->error;
+        header("Location: index.php?error=1");
     }
 
     $stmt->close();
@@ -78,5 +77,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Método de solicitud no válido.";
 }
 
-header("Location: index.php");
 ?>
