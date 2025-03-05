@@ -27,7 +27,6 @@ if (session_status() === PHP_SESSION_NONE) {
         ¡Únete a nuestra comunidad y empieza a compartir lectura hoy mismo!
     </p>
 
-    
 
     <!-- Imagen del logo de la aplicación -->
     <img src="img/logo5_AW.jpg" alt="Logo aplicación" width="350" height="350" style="border-radius: 35%;">

@@ -28,6 +28,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener el nombre de usuario que tiene la sesión iniciada
     $nombre = $_SESSION['usuario'];
 
+    if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] == 0){
+        $nombre_imagen = basename($_FILES['foto']['name']);
+        $ruta_imagen = 'img/' . $nombre_imagen;
+        move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_imagen);
+    }
+    else
+        $ruta_imagen = NULL;
+
     // Verificar si el usuario existe
     $check = $conn->prepare("SELECT idUsuario FROM usuarios WHERE nombre = ?");
     if (!$check) {
@@ -50,23 +58,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check->store_result();
 
     if ($check->num_rows > 0) {
-        $check->close();
-        die("Ya tienes ese libro subido");
+        $check->close();                
+        header("Location: subirLibro.php?error=1");
+        exit();
     }
     $check->close();
 
 
     // Preparar la consulta para insertar el nuevo libro
-    $stmt = $conn->prepare("INSERT INTO libros (titulo, autor, genero, editorial, idioma, estado, descripcion, idpropietario ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO libros (titulo, autor, genero, editorial, idioma, estado, descripcion, imagen, idpropietario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     if (!$stmt) {
         die("Error en la preparación de la consulta: " . $conn->error);
     }
-    $stmt->bind_param("sssssssi", $titulo, $autor, $genero, $editorial, $idioma, $estado, $descripcion, $idUsuario);
+    $stmt->bind_param("ssssssssi", $titulo, $autor, $genero, $editorial, $idioma, $estado, $descripcion, $ruta_imagen, $idUsuario);
 
     // Ejecutar la consulta
     if ($stmt->execute()) {
         header("Location: perfil.php");
-        exit()
+        exit();
     } else {
         header("Location: login.php?error=1");
     }

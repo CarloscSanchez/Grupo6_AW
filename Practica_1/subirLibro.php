@@ -17,7 +17,7 @@
         <div class="form-container">
             <h2>Subir un libro</h2>
         
-            <form action="procesar_libro.php" method="post" enctype="multipart/form-data">
+            <form action="procesar_subida_libro.php" method="post" enctype="multipart/form-data">
                 <!-- Título -->
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" required>
@@ -39,6 +39,7 @@
                     <option value="Histórico">Histórico</option>
                     <option value="Terror">Terror</option>
                     <option value="Biografía">Biografía</option>
+                    <option value="Clásico">Clásico</option>
                 </select>
 
                 <!-- Estado -->
@@ -53,7 +54,7 @@
 
                 <!-- Idioma -->
                 <label for="idioma">Idioma:</label>
-                <input type="text" id="idioma" name="idioma">
+                <input type="text" id="idioma" name="idioma" required>
 
                 <!-- Descripcion -->
                 <label for="descripcion">Descripción:</label>
@@ -61,18 +62,27 @@
 
                 <!-- Editorial -->
                 <label for="editorial">Editorial:</label>
-                <input type="text" id="editorial" name="editorial">
+                <input type="text" id="editorial" name="editorial" required>
 
                 <!-- Foto del libro -->
                 <label for="foto">Foto del libro (opcional):</label>
                 <input type="file" id="foto" name="foto" accept="image/*" onchange="previewImage(event)">
                 <img id="preview" src="#" alt="Vista previa de la imagen" style="display: none;">
 
+                <!-- Mensaje de error -->
+                <div class="error-msg">
+                    <?php
+                    if (isset($_GET['error'])) {
+                        echo "Este libro ya está en la base de datos";
+                    }
+                    ?>
+                </div>
+
                 <!-- Botón de publicar -->
                 <button class="btn-submit" type="submit">Publicar libro</button>
 
                 <button class="btn-cancel" type="button" onclick="window.location.href='perfil.php'">Cancelar</button>
-            </form>
+            </form>            
         </div>
     </div>
     
@@ -98,5 +108,8 @@
             }
         }
     </script>
+    
+
+
 </body>
 </html>
