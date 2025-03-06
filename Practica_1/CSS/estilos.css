@@ -532,3 +532,35 @@ body .login-body{
 .filtros button:hover {
     background-color: #45a049;
 }
+
+.perfil-tabs input[type="radio"] {
+    display: none;
+}
+.perfil-tabs label {
+    color: aliceblue;
+    padding: 10px 20px;
+    background: #2868de;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+    margin-right: 5px;
+}
+.perfil-tabs label:hover {
+    background-color: #0056b3;
+}
+.perfil-tabs input[type="radio"]:checked + label {
+    background: #2868de;
+    border-bottom: 1px solid #fff;
+}
+.perfil-tabs .tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+/* Para controlar que elemento se muestra */
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3 {
+    display: block;
+}
