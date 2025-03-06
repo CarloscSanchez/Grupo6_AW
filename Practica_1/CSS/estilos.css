@@ -564,3 +564,26 @@ body .login-body{
 #tab3:checked ~ #content3 {
     display: block;
 }
+.cta {
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.cta button {
+    padding: 15px 25px;
+    font-size: 18px;
+    color: white;
+    background-color: #ffc107;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

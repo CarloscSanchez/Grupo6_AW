@@ -27,7 +27,7 @@
                 <input type="text" id="autor" name="autor" required>
 
                 <!-- Géneros -->
-                <label for="genero">Género:</label>
+                <label for="genero">Géneros:</label>
                 <select id="genero" name="genero" required>
                     <option value="">Selecciona un género</option>
                     <option value="Poesía">Poesía</option>
@@ -41,6 +41,7 @@
                     <option value="Biografía">Biografía</option>
                     <option value="Clásico">Clásico</option>
                 </select>
+                
 
                 <!-- Estado -->
                 <label for="estado">Estado:</label>

@@ -68,6 +68,7 @@ CREATE TABLE `libros` (
 
 CREATE TABLE `usuarios` (
   `idUsuario` int(11) NOT NULL,
+  `tipo` tinyint(1) DEFAULT 1,
   `nombre` varchar(50) NOT NULL,
   `correo` varchar(128) NOT NULL,
   `contraseña` varchar(256) NOT NULL
