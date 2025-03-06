@@ -1,14 +1,6 @@
 <?php
 
 /**
- * Parámetros de conexión a la BD
- */
-//define('BD_HOST', 'vm007.db.swarm.test');
-//define('BD_NAME', 'bookswap');
-//define('BD_USER', 'bsuser');
-//define('BD_PASS', 'bsuser');
-
-/**
  * Parámetros de conexión a la BD (local, con XAMPP)
  */
 define('BD_HOST', 'localhost');

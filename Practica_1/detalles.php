@@ -44,7 +44,3 @@ session_start(); // Iniciar sesión para manejar el login si es necesario
 
   </body>
 </html>
-
-<!-- 
-Hecho por Álvaro Moreno Arribas.
--->

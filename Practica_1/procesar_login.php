@@ -20,9 +20,7 @@ if ($conn->connect_errno) {
 
 $username = isset($_POST['usuario']) ? trim($_POST['usuario']) : "";
 $password = isset($_POST['password']) ? trim($_POST['password']) : "";
-/*
-$sql = "SELECT nombre, contraseña FROM usuarios WHERE nombre = '$username';"
-$result = $conn->query($sql);*/
+
 // Evitar inyección SQL con consultas preparadas, al principio lo hice con ->query y no funciono
 $stmt = $conn->prepare("SELECT nombre, contraseña FROM usuarios WHERE nombre = ?");
 $stmt->bind_param("s", $username);
