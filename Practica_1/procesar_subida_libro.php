@@ -74,14 +74,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Ejecutar la consulta
     if ($stmt->execute()) {
+        $stmt->close();
+        $conn->close();
         header("Location: perfil.php");
         exit();
     } else {
         die("Error al subir el libro. Detalles: " . $stmt->error);
     }
 
-    $stmt->close();
-    $conn->close();
+ 
 } else {
     echo "Método de solicitud no válido.";
 }

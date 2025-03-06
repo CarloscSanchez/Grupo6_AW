@@ -110,9 +110,10 @@ $conn->close();
                                     "estado" => "Aceptado"
                                 ]
                             ];
+                            $a = 0;
                             foreach ($intercambios_recibidos as $intercambio) {
                                 echo '
-                                <div class="card">
+                                <div class="card" onclick="window.location.href=\'intercambio.php?id=' . $a . '\'">
                                     <h3>' . $intercambio["libro_solicitado"] . '</h3>
                                     <p><strong>Usuario:</strong> ' . $intercambio["usuario"] . '</p>
                                     <p><strong>Ofrece:</strong> ' . $intercambio["libro_ofrecido"] . '</p>
@@ -133,10 +134,11 @@ $conn->close();
                                     "libro_ofrecido" => "Cien años de soledad",
                                     "estado" => "Pendiente"
                                 ]
-                            ];
+                            ];                            
+                            $b = 1;
                             foreach ($intercambios_enviados as $intercambio) {
                                 echo '
-                                <div class="card">
+                                <div class="card" onclick="window.location.href=\'intercambio.php?id=' . $b . '\'">
                                     <h3>' . $intercambio["libro_solicitado"] . '</h3>
                                     <p><strong>Usuario:</strong> ' . $intercambio["usuario"] . '</p>
                                     <p><strong>Ofrezco:</strong> ' . $intercambio["libro_ofrecido"] . '</p>

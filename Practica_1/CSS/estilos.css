@@ -587,3 +587,23 @@ body .login-body{
     transition: all 0.3s ease-in-out;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+.aceptar-intercambio {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.rechazar-intercambio {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #fc3a24;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

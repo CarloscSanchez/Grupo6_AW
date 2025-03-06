@@ -27,7 +27,7 @@
                 <input type="text" id="autor" name="autor" required>
 
                 <!-- Géneros -->
-                <label for="genero">Géneros:</label>
+                <label for="genero">Género:</label>
                 <select id="genero" name="genero" required>
                     <option value="">Selecciona un género</option>
                     <option value="Poesía">Poesía</option>
@@ -67,7 +67,7 @@
 
                 <!-- Foto del libro -->
                 <label for="foto">Foto del libro (opcional):</label>
-                <input type="file" id="foto" name="foto" accept="image/*" onchange="previewImage(event)">
+                <input type="file" id="foto" name="foto" accept="image/*">
                 <img id="preview" src="#" alt="Vista previa de la imagen" style="display: none;">
 
                 <!-- Mensaje de error -->
@@ -85,31 +85,7 @@
                 <button class="btn-cancel" type="button" onclick="window.location.href='perfil.php'">Cancelar</button>
             </form>            
         </div>
-    </div>
-    
-
-    <script>
-        // Función para previsualizar la imagen seleccionada
-        function previewImage(event) {
-            const input = event.target;
-            const preview = document.getElementById('preview');
-
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                preview.src = '#';
-                preview.style.display = 'none';
-            }
-        }
-    </script>
-    
+    </div>  
 
 
 </body>
