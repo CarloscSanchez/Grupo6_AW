@@ -59,7 +59,7 @@
 
                 <!-- Descripcion -->
                 <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion">
+                <input type="text" id="descripcion" name="descripcion" required>
 
                 <!-- Editorial -->
                 <label for="editorial">Editorial:</label>
