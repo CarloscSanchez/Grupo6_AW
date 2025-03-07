@@ -15,7 +15,6 @@
     flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
 }
 
-
 /* Sección izquierda: Logo + Nombre */
 .navbar-left a {
     display: flex;
@@ -100,7 +99,6 @@ body .login-body{
     margin: 0;         /* Nos aseguramos de que no haya márgenes en el body */
 }
 
-
 /* Contenedor del login */
 .login-container {
     background: white;
@@ -168,8 +166,33 @@ body .login-body{
     text-decoration: underline;
 }
 
+/* Estilos para las tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+tr:hover {
+    background-color: #f1f1f1;
+}
+.admin-container {
+    padding: 20px;
+}
 
- /* Estilos para la página de perfil */
+/* Estilos para la página de perfil */
 .perfil-body {
     font-family: Arial, sans-serif;
     margin: 20px;

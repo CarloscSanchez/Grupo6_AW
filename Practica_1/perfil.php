@@ -4,6 +4,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+//si es admin no le deja acceder
+if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'admin') {
+    header("Location: admin.php");
+    exit();
+}   
+
 $usuario = $_SESSION['usuario'];  // Obtener el ID del usuario de la sesión
 
 include 'config.php';   

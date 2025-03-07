@@ -22,7 +22,7 @@ $username = isset($_POST['usuario']) ? trim($_POST['usuario']) : "";
 $password = isset($_POST['password']) ? trim($_POST['password']) : "";
 
 // Evitar inyección SQL con consultas preparadas, al principio lo hice con ->query y no funciono
-$stmt = $conn->prepare("SELECT nombre, contraseña FROM usuarios WHERE nombre = ?");
+$stmt = $conn->prepare("SELECT nombre, contraseña, tipo FROM usuarios WHERE nombre = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -32,7 +32,16 @@ if($result->num_rows > 0){
     if(password_verify($password, $row['contraseña'])){//comprobamos los hashes
         $_SESSION['login'] = true;
         $_SESSION['usuario'] = $row['nombre'];
-        header("Location: index.php");
+        $_SESSION['tipo'] = $row['tipo'];
+
+        error_log("Tipo de usuario: " . $row['tipo']);
+
+        // Redirigir según el rol del usuario
+        if ($row['tipo'] == 'admin') {
+            header("Location: admin.php");
+        } else if ($row['tipo'] == 'normal')  {
+            header("Location: index.php");
+        }
         exit();
     }
 }
