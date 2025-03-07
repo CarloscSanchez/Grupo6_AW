@@ -1,0 +1,1 @@
+La funcionalidad que está 100% implementada es la gestión de libros, del resto únicamente están hechas las vistas.
