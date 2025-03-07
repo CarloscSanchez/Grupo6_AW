@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $nombre = $_SESSION['usuario'];
 
-    $check = $conn->prepare("SELECT idUsuario FROM usuarios WHERE nombre = ?");
+    $check = $conn->prepare("SELECT idusuario FROM usuarios WHERE nombre = ?");
     if (!$check) {
         die("Error en la preparación de la consulta: " . $conn->error);
     }

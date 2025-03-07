@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/logo_icono.ico" type="image/x-icon">
     <link rel="stylesheet" href="CSS/estilos.css"> <!-- Archivo CSS externo -->
     <title>Editar un libro</title>
     
@@ -72,30 +73,6 @@
             </form>            
         </div>
     </div>
-    
-
-    <script>
-        // Función para previsualizar la imagen seleccionada
-        function previewImage(event) {
-            const input = event.target;
-            const preview = document.getElementById('preview');
-
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                preview.src = '#';
-                preview.style.display = 'none';
-            }
-        }
-    </script>
-    
 
 
 </body>

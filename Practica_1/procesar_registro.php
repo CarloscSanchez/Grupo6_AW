@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Verificar si el usuario o el email ya existen
-    $check = $conn->prepare("SELECT idUsuario FROM usuarios WHERE nombre = ? OR correo = ?");
+    $check = $conn->prepare("SELECT idusuario FROM usuarios WHERE nombre = ? OR correo = ?");
     if (!$check) {
         die("Error en la preparación de la consulta: " . $conn->error);
     }

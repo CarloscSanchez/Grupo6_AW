@@ -21,7 +21,7 @@ if ($conn->connect_errno) {
 }
 
 // Consultar la lista de usuarios normales
-$sql_usuarios = "SELECT idUsuario, nombre, correo, tipo FROM usuarios WHERE tipo = 'normal'";
+$sql_usuarios = "SELECT idusuario, nombre, correo, tipo FROM usuarios WHERE tipo = 'normal'";
 $result_usuarios = $conn->query($sql_usuarios);
 
 // Generar la tabla de usuarios
@@ -29,11 +29,11 @@ $tabla_usuarios = '';
 if ($result_usuarios->num_rows > 0) {
     while ($row = $result_usuarios->fetch_assoc()) {
         $tabla_usuarios .= "<tr>";
-        $tabla_usuarios .= "<td>" . $row['idUsuario'] . "</td>";
+        $tabla_usuarios .= "<td>" . $row['idusuario'] . "</td>";
         $tabla_usuarios .= "<td>" . $row['nombre'] . "</td>";
         $tabla_usuarios .= "<td>" . $row['correo'] . "</td>";
         $tabla_usuarios .= "<td>" . $row['tipo'] . "</td>";
-        $tabla_usuarios .= "<td><a href='eliminar_usuario.php?id=" . $row['idUsuario'] . "'>Eliminar</a></td>";
+        $tabla_usuarios .= "<td><a href='eliminar_usuario.php?id=" . $row['idusuario'] . "'>Eliminar</a></td>";
         $tabla_usuarios .= "</tr>";
     }
 } else {

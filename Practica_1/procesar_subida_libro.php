@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ruta_imagen = NULL;
 
     // Verificar si el usuario existe
-    $check = $conn->prepare("SELECT idUsuario FROM usuarios WHERE nombre = ?");
+    $check = $conn->prepare("SELECT idusuario FROM usuarios WHERE nombre = ?");
     if (!$check) {
         die("Error en la preparación de la consulta: " . $conn->error);
     }
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $check->close();
     
     // Verificar si el libro ya existe
-    $check = $conn->prepare("SELECT titulo FROM usuarios LEFT JOIN libros ON usuarios.idUsuario = libros.idpropietario WHERE usuarios.idUsuario = ? AND libros.titulo = ? AND libros.autor = ? AND libros.editorial = ?");
+    $check = $conn->prepare("SELECT titulo FROM usuarios LEFT JOIN libros ON usuarios.idusuario = libros.idpropietario WHERE usuarios.idusuario = ? AND libros.titulo = ? AND libros.autor = ? AND libros.editorial = ?");
     if (!$check) {
         die("Error en la preparación de la consulta: " . $conn->error);
     }

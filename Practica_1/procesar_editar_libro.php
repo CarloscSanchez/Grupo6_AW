@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ruta_imagen = NULL;
 
     // Verificar si el usuario existe
-    $check = $conn->prepare("SELECT idUsuario FROM usuarios WHERE nombre = ?");
+    $check = $conn->prepare("SELECT idusuario FROM usuarios WHERE nombre = ?");
     if (!$check) {
         die("Error en la preparación de la consulta: " . $conn->error);
     }

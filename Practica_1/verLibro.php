@@ -20,7 +20,7 @@ $libro = null;
 
 // Consulta para obtener el libro
 if ($id_libro) {
-    $stmt = $conn->prepare("SELECT * FROM libros LEFT JOIN usuarios ON usuarios.idUsuario = libros.idpropietario  WHERE idlibro = ?");
+    $stmt = $conn->prepare("SELECT * FROM libros LEFT JOIN usuarios ON usuarios.idusuario = libros.idpropietario  WHERE idlibro = ?");
     $stmt->bind_param("i", $id_libro);
     $stmt->execute();
     $libro = $stmt->get_result()->fetch_assoc();
@@ -34,6 +34,7 @@ if ($id_libro) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ver Libro - BookSwap</title>
     <link rel="stylesheet" href="CSS/estilos.css"> <!-- Archivo CSS externo -->
+    <link rel="icon" href="img/logo_icono.ico" type="image/x-icon">
 </head>
 <body>
     <div class="body-verLibro">
@@ -81,15 +82,5 @@ if ($id_libro) {
             ?>
         </div>
     </div>
-    
-    
-    <script>
-        // Función para confirmar el borrado de un libro
-        function confirmarBorrado(id) {
-            if (confirm("¿Estás seguro de que quieres borrar este libro?")) {
-                window.location.href = 'procesar_borrado_libro.php?id=' + id;
-            }
-        }
-    </script>
 </body>
 </html>

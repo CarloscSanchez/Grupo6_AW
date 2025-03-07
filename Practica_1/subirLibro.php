@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/estilos.css"> <!-- Archivo CSS externo -->
+    <link rel="icon" href="img/logo_icono.ico" type="image/x-icon">
     <title>Subir un libro</title>
-    
 </head>
 <body>
     
@@ -67,8 +67,7 @@
 
                 <!-- Foto del libro -->
                 <label for="foto">Foto del libro (opcional):</label>
-                <input type="file" id="foto" name="foto" accept="image/*">
-                <img id="preview" src="#" alt="Vista previa de la imagen" style="display: none;">
+                <input type="file" id="foto" name="foto" accept="image/*" required>
 
                 <!-- Mensaje de error -->
                 <div class="error-msg">

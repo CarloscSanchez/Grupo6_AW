@@ -66,7 +66,7 @@
 
                 // Consulta para obtener los libros publicados por el usuario
                 $libros_publicados = [];
-                $sql = "SELECT * FROM libros LEFT JOIN usuarios ON usuarios.idUsuario = libros.idpropietario WHERE idpropietario != ?";
+                $sql = "SELECT * FROM libros LEFT JOIN usuarios ON usuarios.idusuario = libros.idpropietario WHERE idpropietario != ?";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("i", $id_usuario);    
                 $stmt->execute();
