@@ -25,7 +25,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <!-- Sección derecha: Login/Register o LogOut/Profile -->
     <div class="navbar-right">
-        <?php if (!isset($_SESSION['usuario'])): ?>
+        <?php if (!isset($_SESSION['nombre'])): ?>
             <!-- Si el usuario no está logueado, muestra Login y Register -->
             <a href="login.php" class="nav-item">Login</a>
             <a href="registro.php" class="nav-item">Register</a>

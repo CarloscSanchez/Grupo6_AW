@@ -1,22 +1,13 @@
+
+
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
+//Inicio del procesamiento
+require_once __DIR__.'/includes/config.php';
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <link rel="icon" href="img/logo_icono.ico" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/estilos.css"> <!-- Archivo CSS externo -->
-    <title>BookSwap</title>
-</head>
-<body>
-    <!-- Incluir la barra de navegación -->
-    <?php include 'includes/vistas/comun/navBar.php'; ?>
+$tituloPagina = 'BookSwap';
 
-    <div class="hero">
+$contenidoPrincipal = <<<EOS
+<div class="hero">
         <h1>BookSwap - Comparte y descubre libros cerca de ti</h1>
         <p>
             Intercambia libros físicos de forma fácil y gratuita. Busca títulos en tu área,
@@ -30,6 +21,6 @@ if (session_status() === PHP_SESSION_NONE) {
             <p>Descubre cientos de libros en diferentes géneros y encuentra tu próxima lectura favorita.</p>
             <button onclick="window.location.href='catalogo.php'">Ver Catálogo</button>
     </div>
+EOS;
 
-</body>
-</html>
+require __DIR__.'/includes/vistas/plantillas/plantilla.php';
