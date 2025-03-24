@@ -23,7 +23,7 @@
                 <!-- Título -->
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" required>
-
+                    
                 <!-- Autor -->
                 <label for="autor">Autor:</label>
                 <input type="text" id="autor" name="autor" required>
