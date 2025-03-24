@@ -8,9 +8,9 @@ if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'admin') {
     exit();
 }   
 
-$usuario = $_SESSION['usuario'];  // Obtener el ID del usuario de la sesión
+$usuario = $_SESSION['nombre'];  // Obtener el ID del usuario de la sesión
 
-include 'config.php';   
+include 'includes/config.php';   
 
 $conn = new mysqli(BD_HOST, BD_USER, BD_PASS, BD_NAME);
 
