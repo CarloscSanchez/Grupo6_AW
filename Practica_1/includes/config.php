@@ -1,10 +1,6 @@
 <?php
 
 require_once __DIR__.'/Aplicacion.php';
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 
 /**
  * Parámetros de conexión a la BD (local, con XAMPP)
