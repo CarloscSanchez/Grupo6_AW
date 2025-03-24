@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/includes/config.php';
+require_once __DIR__.'/includes/config.php';
 
 
 // Verificar si el usuario es un administrador
@@ -57,11 +57,9 @@ if ($result_libros->num_rows > 0) {
     $tabla_libros .= "<tr><td colspan='4'>No hay libros registrados.</td></tr>";
 }
 
-?>
 
-<?php
+
 $tituloPagina = 'BookSwap - Admin';
-require_once __DIR__.'/includes/config.php';
 
 $contenidoPrincipal=<<<EOS
   <div class="admin-container">
