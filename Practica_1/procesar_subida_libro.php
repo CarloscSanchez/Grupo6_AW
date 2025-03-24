@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $descripcion = isset($_POST['descripcion']) ? htmlspecialchars(trim($_POST['descripcion'])) : null;  // Sanitizar la descripción
     
     // Obtener el nombre de usuario que tiene la sesión iniciada
-    $nombre = $_SESSION['usuario'];
+    $nombre = $_SESSION['nombre'];
 
     if (isset($_FILES["foto"]) && $_FILES["foto"]["error"] == 0){
         $nombre_imagen = basename($_FILES['foto']['name']);

@@ -29,7 +29,7 @@ require __DIR__.'/includes/config.php';
             <h2>Libro Solicitado</h2>
             <?php                
                 // Incluir la configuración de la base de datos
-                include 'config.php';   
+                include 'includes/config.php';   
 
                 // Crear la conexión
                 $conn = new mysqli(BD_HOST, BD_USER, BD_PASS, BD_NAME);
