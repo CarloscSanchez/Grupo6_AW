@@ -1,8 +1,6 @@
 <?php
+require __DIR__.'/includes/config.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 //si es admin no le deja acceder
 if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'admin') {

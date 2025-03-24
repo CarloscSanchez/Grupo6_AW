@@ -2,9 +2,8 @@
 // Incluir la configuración de la base de datos
 include 'config.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require __DIR__.'/includes/config.php';
+
 
 // Crear la conexión
 $conn = new mysqli(BD_HOST, BD_USER, BD_PASS, BD_NAME);

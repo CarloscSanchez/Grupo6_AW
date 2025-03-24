@@ -1,8 +1,6 @@
 <?php
+require __DIR__.'/includes/config.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 // Incluir la configuración de la base de datos
 include 'config.php';

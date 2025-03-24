@@ -1,5 +1,5 @@
 <?php
-session_start(); // Iniciar sesión para manejar el login si es necesario
+require __DIR__.'/includes/config.php';
 ?>
 
 <!DOCTYPE html>

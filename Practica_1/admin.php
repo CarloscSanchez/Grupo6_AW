@@ -1,7 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require __DIR__.'/includes/config.php';
+
 
 // Verificar si el usuario es un administrador
 if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'admin') {

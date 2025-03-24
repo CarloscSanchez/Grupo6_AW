@@ -1,6 +1,6 @@
 <?php
 // Iniciar la sesión (siempre al principio del script)
-session_start();
+require __DIR__.'/includes/config.php';
 
 // Eliminar las variables de sesión
 if (isset($_SESSION['login'])) {

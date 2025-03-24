@@ -1,6 +1,9 @@
 <?php
 
 require_once __DIR__.'/Aplicacion.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 
 /**
@@ -8,8 +11,8 @@ require_once __DIR__.'/Aplicacion.php';
  */
 define('BD_HOST', 'localhost');
 define('BD_NAME', 'bookswap');
-define('BD_USER', 'bsuser');
-define('BD_PASS', 'bsuser'); // Vacío si no se configura contraseña
+define('BD_USER', 'root');
+define('BD_PASS', ''); // Vacío si no se configura contraseña
 
 /**
  * Parámetros de configuración para rutas locales
