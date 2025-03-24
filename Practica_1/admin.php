@@ -3,16 +3,15 @@ require __DIR__.'/includes/config.php';
 
 
 // Verificar si el usuario es un administrador
-if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'admin') {
+if (!isset($_SESSION['esAdmin']) || $_SESSION['esAdmin'] !== true) {
     header("Location: login.php");
     exit();
 }
 
-// Incluir la configuración de la base de datos
-include 'config.php';
 
 // Crear la conexión
-$conn = new mysqli(BD_HOST, BD_USER, BD_PASS, BD_NAME);
+$app = Aplicacion::getInstance();
+$conn = $app->getConexionBd();
 
 // Verificar la conexión
 if ($conn->connect_errno) {
@@ -58,22 +57,14 @@ if ($result_libros->num_rows > 0) {
     $tabla_libros .= "<tr><td colspan='4'>No hay libros registrados.</td></tr>";
 }
 
-$conn->close();
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <link rel="icon" href="img/logo_icono.ico" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/estilos.css"> <!-- Archivo CSS externo -->
-    <title>BookSwap - Admin</title>
-</head>
-<body>
-    <!-- Incluir la barra de navegación -->
-    <?php include 'includes/vistas/comun/navBar.php'; ?>
+<?php
+$tituloPagina = 'BookSwap - Admin';
+require_once __DIR__.'/includes/config.php';
 
-    <div class="admin-container">
+$contenidoPrincipal=<<<EOS
+  <div class="admin-container">
         <h2>Listado de Usuarios</h2>
         <table>
             <thead>
@@ -86,7 +77,7 @@ $conn->close();
                 </tr>
             </thead>
             <tbody>
-                <?php echo $tabla_usuarios; ?>
+                <?php echo $tabla_usuarios
             </tbody>
         </table>
 
@@ -101,9 +92,12 @@ $conn->close();
                 </tr>
             </thead>
             <tbody>
-                <?php echo $tabla_libros; ?>
+                <?php echo $tabla_libros
             </tbody>
         </table>
     </div>
-</body>
-</html>
+EOS;
+
+require __DIR__.'/includes/vistas/plantillas/plantilla.php';
+
+?>

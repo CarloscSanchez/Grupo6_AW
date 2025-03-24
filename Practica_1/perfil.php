@@ -3,7 +3,7 @@ require_once __DIR__.'/includes/config.php';
 
 
 //si es admin no le deja acceder
-if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'admin') {
+if (isset($_SESSION['esAdmin']) && $_SESSION['esAdmin'] === true) {
     header("Location: admin.php");
     exit();
 }   
