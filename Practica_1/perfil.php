@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/includes/config.php';
+require_once __DIR__.'/includes/config.php';
 
 
 //si es admin no le deja acceder
@@ -9,8 +9,6 @@ if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'admin') {
 }   
 
 $usuario = $_SESSION['nombre'];  // Obtener el ID del usuario de la sesión
-
-include 'includes/config.php';   
 
 $conn = new mysqli(BD_HOST, BD_USER, BD_PASS, BD_NAME);
 

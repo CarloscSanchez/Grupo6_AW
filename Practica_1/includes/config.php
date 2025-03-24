@@ -5,6 +5,8 @@ require_once __DIR__.'/Aplicacion.php';
 /**
  * Parámetros de conexión a la BD (local, con XAMPP)
  */
+
+
 define('BD_HOST', 'localhost');
 define('BD_NAME', 'bookswap');
 define('BD_USER', 'root');
@@ -13,11 +15,13 @@ define('BD_PASS', ''); // Vacío si no se configura contraseña
 /**
  * Parámetros de configuración para rutas locales
  */
+
 define('RAIZ_APP', __DIR__);
 define('RUTA_APP', '/Grupo7_AW/Practica_1');
 define('RUTA_IMGS', RUTA_APP.'/img/');
 define('RUTA_CSS', RUTA_APP.'/CSS/');
 define('RUTA_JS', RUTA_APP.'/js/');
+
 
 /**
  * Configuración de UTF-8 y zona horaria
