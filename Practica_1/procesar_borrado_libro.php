@@ -6,17 +6,17 @@ require __DIR__.'/includes/config.php';
 
 
 // Crear la conexión
-$conn = new mysqli(BD_HOST, BD_USER, BD_PASS, BD_NAME);
+$app = Aplicacion::getInstance();
+$conn = $app->getConexionBD();
 
 // Verificar la conexión
 if ($conn->connect_errno) {
     die("Error de conexión a la base de datos: " . $conn->connect_error);
 }
 
-
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $nombre = $_SESSION['usuario'];
+    $nombre = $_SESSION['nombre'];
 
     $check = $conn->prepare("SELECT idusuario FROM usuarios WHERE nombre = ?");
     if (!$check) {
