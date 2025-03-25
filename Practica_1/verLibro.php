@@ -25,8 +25,8 @@ $tituloPagina = 'Ver Libro - BookSwap';
 
 if ($libro) {
     $acciones = '';
-    if (isset($_SESSION['usuario'])) {
-        if ($libro["nombre"] == $_SESSION['usuario']) {
+    if (isset($_SESSION['nombre'])) {
+        if ($libro["nombre"] == $_SESSION['nombre']) {
             $acciones = <<<EOS
             <div class="acciones">
                 <button class="editar" onclick="window.location.href='editarLibro.php?id={$libro["idlibro"]}'">Editar</button>

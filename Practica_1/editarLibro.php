@@ -1,79 +1,80 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/logo_icono.ico" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/estilos.css"> <!-- Archivo CSS externo -->
-    <title>Editar un libro</title>
-    
-</head>
-<body>
-    <!-- Incluir la barra de navegación -->
-    <?php include 'includes/vistas/comun/navBar.php'; ?>
-    
-    <?php $id = isset($_GET['id']) ? $_GET['id'] : '';  // Obtener el id del libro a editar  ?>
+<?php
+require_once __DIR__.'/includes/config.php';
 
+$app = Aplicacion::getInstance();
+$conn = $app->getConexionBd();
+
+if ($conn->connect_errno) {
+    die("Error de conexión a la base de datos: " . $conn->connect_error);
+}
+
+$id = isset($_GET['id']) ? $_GET['id'] : '';
+
+if ($id) {
+    $stmt = $conn->prepare("SELECT * FROM libros WHERE idlibro = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $libro = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+} else {
+    die("ID de libro no proporcionado.");
+}
+
+$tituloPagina = 'Editar un libro';
+
+$contenidoPrincipal = <<<EOS
     <div class="body-subirLibro">
         <div class="form-container">
             <h2>Edita tu libro</h2>
-            
-            <!-- Formulario para subir un libro -->
-            <form action="procesar_editar_libro.php?id=<?php echo htmlspecialchars($id); ?>" method="post" enctype="multipart/form-data">
-                <!-- Título -->
+            <form action="procesar_editar_libro.php?id={$id}" method="post" enctype="multipart/form-data">
                 <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" required>
-                    
-                <!-- Autor -->
+                <input type="text" id="titulo" name="titulo" value="{$libro['titulo']}" required>
+                
                 <label for="autor">Autor:</label>
-                <input type="text" id="autor" name="autor" required>
-
-                <!-- Géneros -->
+                <input type="text" id="autor" name="autor" value="{$libro['autor']}" required>
+                
                 <label for="genero">Género:</label>
                 <select id="genero" name="genero" required>
                     <option value="">Selecciona un género</option>
-                    <option value="Poesía">Poesía</option>
-                    <option value="Aventuras">Aventuras</option>
-                    <option value="Ciencia ficción">Ciencia ficción</option>
-                    <option value="Romance">Romance</option>
-                    <option value="Misterio">Misterio</option>
-                    <option value="Fantasía">Fantasía</option>
-                    <option value="Histórico">Histórico</option>
-                    <option value="Terror">Terror</option>
-                    <option value="Biografía">Biografía</option>
-                    <option value="Clásico">Clásico</option>
-                </select>
+EOS;
 
-                <!-- Estado -->
+$generos = ["Poesía", "Aventuras", "Ciencia ficción", "Romance", "Misterio", "Fantasía", "Histórico", "Terror", "Biografía", "Clásico"];
+foreach ($generos as $genero) {
+    $selected = ($libro['genero'] == $genero) ? 'selected' : '';
+    $contenidoPrincipal .= "<option value=\"$genero\" $selected>$genero</option>";
+}
+
+$contenidoPrincipal .= <<<EOS
+                </select>
+                
                 <label for="estado">Estado:</label>
                 <select id="estado" name="estado">
                     <option value="">Selecciona un estado</option>
-                    <option value="nuevo">Nuevo</option>
-                    <option value="bueno">Bueno</option>
-                    <option value="aceptable">Aceptable</option>
-                    <option value="deteriorado">Deteriorado</option>
+EOS;
+
+$estados = ["nuevo", "bueno", "aceptable", "deteriorado"];
+foreach ($estados as $estado) {
+    $selected = ($libro['estado'] == $estado) ? 'selected' : '';
+    $contenidoPrincipal .= "<option value=\"$estado\" $selected>$estado</option>";
+}
+
+$contenidoPrincipal .= <<<EOS
                 </select>
-
-                <!-- Idioma -->
+                
                 <label for="idioma">Idioma:</label>
-                <input type="text" id="idioma" name="idioma" required>
-
-                <!-- Descripcion -->
+                <input type="text" id="idioma" name="idioma" value="{$libro['idioma']}" required>
+                
                 <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion">
-
-                <!-- Editorial -->
+                <input type="text" id="descripcion" name="descripcion" value="{$libro['descripcion']}">
+                
                 <label for="editorial">Editorial:</label>
-                <input type="text" id="editorial" name="editorial" required>
-
-
-                <!-- Botón de actualizar -->
+                <input type="text" id="editorial" name="editorial" value="{$libro['editorial']}" required>
+                
                 <button class="btn-submit" type="submit">Actualizar libro</button>
                 <button class="btn-cancel" type="button" onclick="window.location.href='perfil.php'">Cancelar</button>
-            </form>            
+            </form>
         </div>
     </div>
+EOS;
 
-
-</body>
-</html>
+require __DIR__.'/includes/vistas/plantillas/plantilla.php';
