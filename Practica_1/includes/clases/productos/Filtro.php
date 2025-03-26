@@ -31,14 +31,38 @@ class Filtro extends Formulario
         $buscar = htmlspecialchars($datos['buscar'] ?? '');
         $generosSeleccionados = $datos['genero'] ?? [];
 
-        // Lista de géneros disponibles
-        $generos = ['Ficción', 'Realismo mágico', 'Ciencia ficción', 'Distopía', 'Romance', 'Clásico', 'Fantasía', 'Aventura'];
+        // Lista de géneros disponibles (ya organizada en categorías)
+        $generos = [
+            'Ficción' => [
+                'Novela', 'Cuento', 'Ciencia ficción', 'Fantasía', 'Terror', 
+                'Misterio y suspenso', 'Romance', 'Aventura', 'Histórica', 
+                'Drama', 'Realismo mágico', 'Distopía'
+            ],
+            'No ficción' => [
+                'Biografía y autobiografía', 'Ensayo', 'Historia', 'Filosofía', 
+                'Psicología', 'Ciencia y divulgación científica', 'Autoayuda y desarrollo personal', 
+                'Política', 'Economía', 'Viajes y exploración', 'Religión y espiritualidad'
+            ],
+            'Infantil y juvenil' => [
+                'Cuentos infantiles', 'Literatura juvenil (Young Adult - YA)', 
+                'Fábulas y cuentos clásicos', 'Libros ilustrados'
+            ],
+            'Poesía y teatro' => [
+                'Poesía lírica', 'Dramaturgia', 'Teatro clásico y contemporáneo'
+            ],
+            'Cómics y novelas gráficas' => [
+                'Manga', 'Superhéroes', 'Historieta europea', 'Novela gráfica independiente'
+            ]
+        ];
 
         // Generar los checkboxes para los géneros
         $htmlGeneros = '';
-        foreach ($generos as $genero) {
-            $checked = in_array($genero, $generosSeleccionados) ? 'checked' : '';
-            $htmlGeneros .= "<label><input type='checkbox' name='genero[]' value='$genero' $checked> $genero</label>";
+        foreach ($generos as $categoria => $listaGeneros) {
+            $htmlGeneros .= "<h4>$categoria</h4>"; // Mostrar la categoría como un encabezado
+            foreach ($listaGeneros as $genero) {
+                $checked = in_array($genero, $generosSeleccionados) ? 'checked' : '';
+                $htmlGeneros .= "<label><input type='checkbox' name='genero[]' value='$genero' $checked> $genero</label>";
+            }
         }
 
         // Generar el formulario

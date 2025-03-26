@@ -45,16 +45,46 @@ class FormularioSubirLibro extends Formulario
 
             <div class="input-group">
                 <label for="genero">Género:</label>
-                <select id="genero" name="genero" required>
-                    <option value="">Selecciona un género</option>
-                    <option value="Poesía" {$this->selected($genero, 'Poesía')}>Poesía</option>
-                    <option value="Aventuras" {$this->selected($genero, 'Aventuras')}>Aventuras</option>
-                    <option value="Ciencia ficción" {$this->selected($genero, 'Ciencia ficción')}>Ciencia ficción</option>
-                    <option value="Romance" {$this->selected($genero, 'Romance')}>Romance</option>
-                    <option value="Misterio" {$this->selected($genero, 'Misterio')}>Misterio</option>
-                    <option value="Fantasía" {$this->selected($genero, 'Fantasía')}>Fantasía</option>
-                    <option value="Histórico" {$this->selected($genero, 'Histórico')}>Histórico</option>
-                </select>
+                    <select id="genero" name="genero" required>
+                        <option value="">Selecciona un género</option>
+                        <option value="Novela" {$this->selected($genero, 'Novela')}>Novela</option>
+                        <option value="Cuento" {$this->selected($genero, 'Cuento')}>Cuento</option>
+                        <option value="Ciencia ficción" {$this->selected($genero, 'Ciencia ficción')}>Ciencia ficción</option>
+                        <option value="Fantasía" {$this->selected($genero, 'Fantasía')}>Fantasía</option>
+                        <option value="Terror" {$this->selected($genero, 'Terror')}>Terror</option>
+                        <option value="Misterio y suspenso" {$this->selected($genero, 'Misterio y suspenso')}>Misterio y suspenso</option>
+                        <option value="Romance" {$this->selected($genero, 'Romance')}>Romance</option>
+                        <option value="Aventura" {$this->selected($genero, 'Aventura')}>Aventura</option>
+                        <option value="Histórica" {$this->selected($genero, 'Histórica')}>Histórica</option>
+                        <option value="Drama" {$this->selected($genero, 'Drama')}>Drama</option>
+                        <option value="Realismo mágico" {$this->selected($genero, 'Realismo mágico')}>Realismo mágico</option>
+                        <option value="Distopía" {$this->selected($genero, 'Distopía')}>Distopía</option>
+                        <option value="Biografía y autobiografía" {$this->selected($genero, 'Biografía y autobiografía')}>Biografía y autobiografía</option>
+                        <option value="Ensayo" {$this->selected($genero, 'Ensayo')}>Ensayo</option>
+                        <option value="Historia" {$this->selected($genero, 'Historia')}>Historia</option>
+                        <option value="Filosofía" {$this->selected($genero, 'Filosofía')}>Filosofía</option>
+                        <option value="Psicología" {$this->selected($genero, 'Psicología')}>Psicología</option>
+                        <option value="Ciencia y divulgación científica" {$this->selected($genero, 'Ciencia y divulgación científica')}>Ciencia y divulgación científica</option>
+                        <option value="Autoayuda y desarrollo personal" {$this->selected($genero, 'Autoayuda y desarrollo personal')}>Autoayuda y desarrollo personal</option>
+                        <option value="Política" {$this->selected($genero, 'Política')}>Política</option>
+                        <option value="Economía" {$this->selected($genero, 'Economía')}>Economía</option>
+                        <option value="Viajes y exploración" {$this->selected($genero, 'Viajes y exploración')}>Viajes y exploración</option>
+                        <option value="Religión y espiritualidad" {$this->selected($genero, 'Religión y espiritualidad')}>Religión y espiritualidad</option>
+                        <option value="Infantil y juvenil" {$this->selected($genero, 'Infantil y juvenil')}>Infantil y juvenil</option>
+                        <option value="Cuentos infantiles" {$this->selected($genero, 'Cuentos infantiles')}>Cuentos infantiles</option>
+                        <option value="Literatura juvenil (Young Adult - YA)" {$this->selected($genero, 'Literatura juvenil (Young Adult - YA')}>Literatura juvenil (Young Adult - YA)</option>
+                        <option value="Fábulas y cuentos clásicos" {$this->selected($genero, 'Fábulas y cuentos clásicos')}>Fábulas y cuentos clásicos</option>
+                        <option value="Libros ilustrados" {$this->selected($genero, 'Libros ilustrados')}>Libros ilustrados</option>
+                        <option value="Poesía y teatro" {$this->selected($genero, 'Poesía y teatro')}>Poesía y teatro</option>
+                        <option value="Poesía lírica" {$this->selected($genero, 'Poesía lírica')}>Poesía lírica</option>
+                        <option value="Dramaturgia" {$this->selected($genero, 'Dramaturgia')}>Dramaturgia</option>
+                        <option value="Teatro clásico y contemporáneo" {$this->selected($genero, 'Teatro clásico y contemporáneo')}>Teatro clásico y contemporáneo</option>
+                        <option value="Cómics y novelas gráficas" {$this->selected($genero, 'Cómics y novelas gráficas')}>Cómics y novelas gráficas</option>
+                        <option value="Manga" {$this->selected($genero, 'Manga')}>Manga</option>
+                        <option value="Superhéroes" {$this->selected($genero, 'Superhéroes')}>Superhéroes</option>
+                        <option value="Historieta europea" {$this->selected($genero, 'Historieta europea')}>Historieta europea</option>
+                        <option value="Novela gráfica independiente" {$this->selected($genero, 'Novela gráfica independiente')}>Novela gráfica independiente</option>
+                    </select>
                 {$erroresCampos['genero']}
             </div>
 
