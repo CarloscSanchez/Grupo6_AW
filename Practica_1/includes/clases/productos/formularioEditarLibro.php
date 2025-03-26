@@ -138,12 +138,11 @@ class FormularioEditarLibro extends Formulario
         }
         // Si no hay errores, delegar la actualización del libro a la clase Libro
         if (count($this->errores) === 0) {
-            $idLibro = null; 
             $libro = Libro::buscaPorId($_GET['id']);
-            Libro::actualiza($libro);
             if (!$libro) {
                 $this->errores[] = "Error al editar el libro.";
             }
+            Libro::actualiza($libro);
         }
     }
 
