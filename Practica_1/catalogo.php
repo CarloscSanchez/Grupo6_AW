@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/clases/productos/Filtro.php';
+require_once __DIR__ . '/includes/clases/usuarios/Usuario.php';
 
 $tituloPagina = 'Catálogo de Libros';
 
@@ -16,7 +17,7 @@ $contenidoPrincipal = <<<EOS
 <div class="catalogo-contenedor">
     <aside class="filtros">
         <h2>Buscar y Filtrar</h2>
-        $htmlFiltro <!-- El formulario siempre se incluye aquí -->
+        $htmlFiltro 
     </aside>
     <div class="catalogo-body">
         <h1>Catálogo de Libros</h1>
@@ -26,16 +27,17 @@ EOS;
 // Mostrar cada libro en una tarjeta
 foreach ($libros as $libro) {
     $contenidoPrincipal .= <<<EOS
-    <div class="card">
-        <img src="{$libro['imagen']}" alt="{$libro['titulo']}">
-        <h2>{$libro['titulo']}</h2>
-        <p><strong>Autor:</strong> {$libro['autor']}</p>
-        <p>{$libro['descripcion']}</p>
-        <p><strong>Propietario:</strong> {$libro['nombre']}</p>
-        <div class="generos">
-            <span>{$libro['genero']}</span>
+    
+        <div class="card" onclick="window.location.href='verLibro.php?id={$libro['idlibro']}'">
+            <img src="{$libro['imagen']}" alt="{$libro['titulo']}">
+            <h2>{$libro['titulo']}</h2>
+            <p><strong>Autor:</strong> {$libro['autor']}</p>
+            <p>{$libro['descripcion']}</p>
+            <p><strong>Propietario:</strong> {$libro['nombre']}</p>
+            <div class="generos">
+                <span>{$libro['genero']}</span>
+            </div>
         </div>
-    </div>
 EOS;
 }
 

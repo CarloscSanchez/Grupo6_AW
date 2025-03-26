@@ -96,6 +96,34 @@ class Libro
         return $libros;
     }
 
+    /**
+     * Función que carga los libros de un usuario
+     * @param $idusuario
+     * @return array con los libros del usuario
+     */
+    public static function cargaLibrosUsuario($idusuario){
+        // Array para guardar los libros
+        $libros_publicados = array();
+
+        // Conexión a la base de datos
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        
+        // Consulta para obtener los libros del usuario
+        $query = "SELECT * FROM libros WHERE idpropietario = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $idusuario);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Guardar los libros en un array
+        while($libro = $result->fetch_assoc()){
+            $libros_publicados[] = $libro;
+        }
+
+        $stmt->close();
+        return $libros_publicados;
+    }
+
     public static function actualiza($libro)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();

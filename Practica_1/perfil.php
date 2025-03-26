@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__.'/includes/config.php';
+require_once __DIR__.'/includes/clases/productos/Libro.php';
+require_once __DIR__.'/includes/clases/usuarios/Usuario.php';
 
 // Si es admin no le deja acceder
 if (isset($_SESSION['esAdmin']) && $_SESSION['esAdmin'] === true) {
@@ -7,36 +9,18 @@ if (isset($_SESSION['esAdmin']) && $_SESSION['esAdmin'] === true) {
     exit();
 }
 
-$usuario = $_SESSION['nombre'];  // Obtener el ID del usuario de la sesión
+// Buscar el ID del usuario
+$usuario = Usuario::buscaUsuario($_SESSION['nombre']);
 
-$app = Aplicacion::getInstance();
-$conn = $app->getConexionBd();
-
-if ($conn->connect_errno) {
-    die("Error de conexión a la base de datos: " . $conn->connect_error);
+$nombreUsuario = $usuario->getNombre();
+// Si no se encuentra el usuario, redirigir a la página de inicio
+if (!$usuario) {
+    header("Location: index.php");
+    exit();
 }
 
-// Consulta para obtener el id de usuario
-$stmt = $conn->prepare("SELECT idusuario FROM usuarios WHERE nombre = ?");
-$stmt->bind_param("s", $usuario);
-$stmt->execute();
-$id_usuario = $stmt->get_result()->fetch_assoc()['idusuario'];
-$stmt->close();
-
-// Consulta para obtener los libros publicados por el usuario
-$libros_publicados = [];
-$sql = "SELECT * FROM libros WHERE idpropietario = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id_usuario);    
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Guardar los libros en un array
-while($libro = $result->fetch_assoc()){
-    $libros_publicados[] = $libro;
-}
-
-$stmt->close();
+// Cargar los libros del usuario
+$libros_publicados = Libro::cargaLibrosUsuario($usuario->getId());
 
 $tituloPagina = 'Perfil de Usuario - BookSwap';
 
@@ -47,7 +31,7 @@ $contenidoPrincipal = <<<EOS
         <!-- Foto de perfil y botón para cambiarla -->
         <div class='foto-perfil'>
             <img src='img/logo5_AW.jpg' alt='Foto de perfil'>
-            <p class='nombre-usuario'>$usuario</p>
+            <p class='nombre-usuario'>$nombreUsuario</p>
             <button>Cambiar foto de perfil</button>
         </div>
 

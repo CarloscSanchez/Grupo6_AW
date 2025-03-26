@@ -81,14 +81,29 @@ class Filtro extends Formulario
         // Obtener la conexión a la BD
         $conn = Aplicacion::getInstance()->getConexionBd();
 
+        // Busca el usuario actual
+        $usuario = Usuario::buscaUsuario($_SESSION['nombre']);
+        $idUsuario = $usuario->getId();
+
         // Procesar los filtros
         $datos = $_GET; // Obtener los datos enviados por el formulario
         $resultadoFiltro = $this->procesaFormulario($datos); // Procesar los datos
         $where = $resultadoFiltro['where'] ?? '';
         $parametros = $resultadoFiltro['parametros'] ?? [];
 
+        // Para no mostrar los libros del usuario actual
+        if (!empty($where)) {
+            $where .= " AND idpropietario != ?";
+        } else {
+            $where = "WHERE idpropietario != ?";
+        }
+        $parametros[] = $idUsuario;
+
+
         // Construir la consulta SQL
-        $sql = "SELECT * FROM libros LEFT JOIN usuarios ON usuarios.idusuario = libros.idpropietario $where";
+        $sql = "SELECT * FROM libros 
+                LEFT JOIN usuarios ON usuarios.idusuario = libros.idpropietario 
+                $where";
         $stmt = $conn->prepare($sql);
 
         if (!empty($parametros)) {
