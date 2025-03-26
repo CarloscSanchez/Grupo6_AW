@@ -78,6 +78,23 @@ class Usuario
         return $result;
     }
     
+    public static function buscaPorTipo($tipo)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("SELECT * FROM Usuarios WHERE tipo='%s'", $conn->real_escape_string($tipo));
+        $rs = $conn->query($query);
+        $result = [];
+        if ($rs) {
+            while ($fila = $rs->fetch_assoc()) {
+                $result[] = new Usuario($fila['nombre'], $fila['contraseña'], $fila['correo'], $fila['idusuario']);
+            }
+            $rs->free();
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+        return $result;
+    }
+
     private static function hashPassword($password)
     {
         return password_hash($password, PASSWORD_DEFAULT);

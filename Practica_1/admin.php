@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/includes/config.php';
-
+require_once __DIR__.'/includes/clases/usuarios/Usuario.php';
+require_once __DIR__.'/includes/clases/productos/Libro.php';
 
 // Verificar si el usuario es un administrador
 if (!isset($_SESSION['esAdmin']) || $_SESSION['esAdmin'] !== true) {
@@ -8,30 +9,19 @@ if (!isset($_SESSION['esAdmin']) || $_SESSION['esAdmin'] !== true) {
     exit();
 }
 
-
-// Crear la conexión
-$app = Aplicacion::getInstance();
-$conn = $app->getConexionBd();
-
-// Verificar la conexión
-if ($conn->connect_errno) {
-    die("Error de conexión a la base de datos: " . $conn->connect_error);
-}
-
-// Consultar la lista de usuarios normales
-$sql_usuarios = "SELECT idusuario, nombre, correo, tipo FROM usuarios WHERE tipo = 'normal'";
-$result_usuarios = $conn->query($sql_usuarios);
+// Obtener la lista de usuarios
+$usuarios = Usuario::buscaPorTipo('normal');
 
 // Generar la tabla de usuarios
 $tabla_usuarios = '';
-if ($result_usuarios->num_rows > 0) {
-    while ($row = $result_usuarios->fetch_assoc()) {
+if ($usuarios) {
+    foreach ($usuarios as $usuario) {
         $tabla_usuarios .= "<tr>";
-        $tabla_usuarios .= "<td>" . $row['idusuario'] . "</td>";
-        $tabla_usuarios .= "<td>" . $row['nombre'] . "</td>";
-        $tabla_usuarios .= "<td>" . $row['correo'] . "</td>";
-        $tabla_usuarios .= "<td>" . $row['tipo'] . "</td>";
-        $tabla_usuarios .= "<td><a href='eliminar_usuario.php?id=" . $row['idusuario'] . "'>Eliminar</a></td>";
+        $tabla_usuarios .= "<td>" . $usuario->getId() . "</td>";
+        $tabla_usuarios .= "<td>" . $usuario->getNombre() . "</td>";
+        $tabla_usuarios .= "<td>" . $usuario->getCorreo() . "</td>";
+        $tabla_usuarios .= "<td> normal </td>"; // Convertir array a cadena
+        $tabla_usuarios .= "<td><a href='eliminar_usuario.php?id=" . $usuario->getId() . "'>Eliminar</a></td>";
         $tabla_usuarios .= "</tr>";
     }
 } else {
@@ -39,25 +29,22 @@ if ($result_usuarios->num_rows > 0) {
 }
 
 // Consultar la lista de libros
-$sql_libros = "SELECT idlibro, titulo, autor FROM libros";
-$result_libros = $conn->query($sql_libros);
+$libros = Libro::getLibros();
 
 // Generar la tabla de libros
 $tabla_libros = '';
-if ($result_libros->num_rows > 0) {
-    while ($row = $result_libros->fetch_assoc()) {
+if ($libros) {
+    foreach($libros as $libro) {
         $tabla_libros .= "<tr>";
-        $tabla_libros .= "<td>" . $row['idlibro'] . "</td>";
-        $tabla_libros .= "<td>" . $row['titulo'] . "</td>";
-        $tabla_libros .= "<td>" . $row['autor'] . "</td>";
-        $tabla_libros .= "<td><a href='eliminar_libro.php?id=" . $row['idlibro'] . "'>Eliminar</a></td>";
+        $tabla_libros .= "<td>" . $libro->getId() . "</td>";
+        $tabla_libros .= "<td>" . $libro->getTitulo() . "</td>";
+        $tabla_libros .= "<td>" . $libro->getAutor() . "</td>";
+        $tabla_libros .= "<td><a href='eliminar_libro.php?id=" . $libro->getId() . "'>Eliminar</a></td>";
         $tabla_libros .= "</tr>";
     }
 } else {
     $tabla_libros .= "<tr><td colspan='4'>No hay libros registrados.</td></tr>";
 }
-
-
 
 $tituloPagina = 'BookSwap - Admin';
 
@@ -75,7 +62,7 @@ $contenidoPrincipal=<<<EOS
                 </tr>
             </thead>
             <tbody>
-                <?php echo $tabla_usuarios
+                $tabla_usuarios
             </tbody>
         </table>
 
@@ -90,12 +77,11 @@ $contenidoPrincipal=<<<EOS
                 </tr>
             </thead>
             <tbody>
-                <?php echo $tabla_libros
+                $tabla_libros
             </tbody>
         </table>
     </div>
 EOS;
 
 require __DIR__.'/includes/vistas/plantillas/plantilla.php';
-
 ?>

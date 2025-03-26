@@ -37,6 +37,35 @@ class Libro
         return self::inserta($libro);
     }
 
+
+    public static function getLibros(){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = "SELECT * FROM libros";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $libros = [];
+        
+        while ($fila = $result->fetch_assoc()) {
+            $libros[] = new self(
+                $fila['titulo'],
+                $fila['autor'],
+                $fila['genero'],
+                $fila['editorial'],
+                $fila['idioma'],
+                $fila['estado'],
+                $fila['descripcion'],
+                $fila['imagen'],
+                $fila['idpropietario'],
+                $fila['disponible'],
+                $fila['fecha_publicacion'],
+                $fila['idlibro']
+            );
+        }
+        $stmt->close();
+        return $libros;
+    }
+
     public static function buscaPorId($idlibro)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
