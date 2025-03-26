@@ -136,14 +136,11 @@ class FormularioEditarLibro extends Formulario
         } else {
             $this->errores['foto'] = 'Debes seleccionar una imagen válida.';
         }
-        // Si no hay errores, delegar la creación del libro a la clase Libro
+        // Si no hay errores, delegar la actualización del libro a la clase Libro
         if (count($this->errores) === 0) {
-            $idUsuario = null; 
-            $usuario = Usuario::buscaUsuario($_SESSION['nombre']);
-            if ($usuario) {
-                $idUsuario = $usuario->getId();
-            }
-            $libro = Libro::crea($titulo, $autor, $genero, $editorial, $idioma, $estado, $descripcion, $ruta_imagen, $idUsuario);
+            $idLibro = null; 
+            $libro = Libro::buscaPorId($_GET['id']);
+            Libro::actualiza($libro);
             if (!$libro) {
                 $this->errores[] = "Error al editar el libro.";
             }
