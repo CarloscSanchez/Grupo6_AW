@@ -630,3 +630,138 @@ tr:hover {
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* Estilos para la página de contacto */
+.contacto-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.contacto-titulo {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.contacto-descripcion {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.contacto-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contacto-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contacto-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.contacto-input,
+.contacto-textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.contacto-textarea {
+    resize: none;
+}
+
+.contacto-radio-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.contacto-radio {
+    margin-right: 5px;
+}
+
+.contacto-radio-label {
+    font-size: 14px;
+    color: #333;
+}
+
+.contacto-checkbox {
+    margin-right: 10px;
+}
+
+.contacto-checkbox-label {
+    font-size: 14px;
+    color: #333;
+}
+
+.contacto-form-actions {
+    text-align: center;
+}
+
+.contacto-btn-enviar {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contacto-btn-enviar:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para la página de agradecimiento */
+.gracias-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.gracias-titulo {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.gracias-mensaje {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.gracias-boton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.gracias-boton:hover {
+    background-color: #0056b3;
+}
