@@ -12,12 +12,13 @@ if (isset($_SESSION['esAdmin']) && $_SESSION['esAdmin'] === true) {
 // Buscar el ID del usuario
 $usuario = Usuario::buscaUsuario($_SESSION['nombre']);
 
-$nombreUsuario = $usuario->getNombre();
 // Si no se encuentra el usuario, redirigir a la página de inicio
 if (!$usuario) {
     header("Location: index.php");
     exit();
 }
+
+$nombreUsuario = $usuario->getNombre();
 
 // Cargar los libros del usuario
 $libros_publicados = Libro::cargaLibrosUsuario($usuario->getId());
