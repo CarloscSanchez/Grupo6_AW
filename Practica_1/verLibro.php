@@ -1,7 +1,7 @@
 <?php
 require __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/clases/productos/Libro.php';
-require_once __DIR__.'/includes/clases/usuarios/Usuario.php';
+require_once __DIR__.'/includes/clases/productos/libro.php';
+require_once __DIR__.'/includes/clases/usuarios/usuario.php';
 
 $id_libro = $_GET["id"] ?? null;
 
