@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Formulario.php';
+require_once __DIR__ . '/../formulario.php';
 
 class FormularioContacto extends Formulario
 {
