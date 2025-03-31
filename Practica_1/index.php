@@ -14,13 +14,13 @@ $contenidoPrincipal = <<<EOS
             contacta con otros lectores y da una nueva vida a tus historias favoritas.
             ¡Únete a nuestra comunidad y empieza a compartir lectura hoy mismo!
         </p>
-    </div>
 
     <div class="cta">
             <h2>Explora Nuestro Catálogo </h2>
             <p>Descubre cientos de libros en diferentes géneros y encuentra tu próxima lectura favorita.</p>
             <button onclick="window.location.href='catalogo.php'">Ver Catálogo</button>
     </div>
+</div>
 EOS;
 
 require __DIR__.'/includes/vistas/plantillas/plantilla.php';
