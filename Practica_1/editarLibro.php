@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/clases/productos/FormularioEditarLibro.php';
+require_once __DIR__.'/includes/clases/productos/formularioEditarLibro.php';
 
 $form = new FormularioEditarLibro();
 $htmlFormSubirLibro = $form->gestiona();
