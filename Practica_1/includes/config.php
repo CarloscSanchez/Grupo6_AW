@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/Aplicacion.php';
+require_once __DIR__.'/aplicacion.php';
 
 /**
  * Parámetros de conexión a la BD (local, con XAMPP)
@@ -17,7 +17,7 @@ define('BD_PASS', ''); // Vacío si no se configura contraseña
  */
 
 define('RAIZ_APP', __DIR__);
-define('RUTA_APP', '/Grupo7_AW/Practica_1');
+define('RUTA_APP', '/Grupo6_AW/Practica_1');
 define('RUTA_IMGS', RUTA_APP.'/img/');
 define('RUTA_CSS', RUTA_APP.'/CSS/');
 define('RUTA_JS', RUTA_APP.'/js/');
