@@ -3,7 +3,7 @@
 require_once __DIR__.'/includes/config.php';
 
 // esto cambiarlo por namespace en un futuro
-require_once __DIR__.'/includes/clases/usuarios/FormularioLogin.php';
+require_once __DIR__.'/includes/clases/usuarios/formularioLogin.php';
 
 $form = new FormularioLogin();
 $htmlFormLogin = $form->gestiona();
