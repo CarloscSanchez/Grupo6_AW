@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/clases/usuarios/FormularioRegistro.php';
+require_once __DIR__.'/includes/clases/usuarios/formularioRegistro.php';
 
 $form = new FormularioRegistro();
 $htmlFormRegistro = $form->gestiona();
