@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__.'/../../Formulario.php';
-require_once __DIR__.'/Libro.php';
-require_once __DIR__.'/../usuarios/Usuario.php';
+require_once __DIR__.'/../../formulario.php';
+require_once __DIR__.'/fibro.php';
+require_once __DIR__.'/../usuarios/usuario.php';
 
 class FormularioEditarLibro extends Formulario
 {
