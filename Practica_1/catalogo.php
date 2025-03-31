@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/includes/config.php';
-require_once __DIR__ . '/includes/clases/productos/Filtro.php';
-require_once __DIR__ . '/includes/clases/usuarios/Usuario.php';
+require_once __DIR__ . '/includes/clases/productos/filtro.php';
+require_once __DIR__ . '/includes/clases/usuarios/usuario.php';
 
 $tituloPagina = 'Catálogo de Libros';
 
