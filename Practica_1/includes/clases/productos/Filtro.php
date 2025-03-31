@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../../Formulario.php';
-require_once __DIR__ . '/../../Aplicacion.php';
+require_once __DIR__ . '/../../formulario.php';
+require_once __DIR__ . '/../../aplicacion.php';
 
 class Filtro extends Formulario
 {
@@ -105,23 +105,31 @@ class Filtro extends Formulario
         // Obtener la conexión a la BD
         $conn = Aplicacion::getInstance()->getConexionBd();
 
-        // Busca el usuario actual
-        $usuario = Usuario::buscaUsuario($_SESSION['nombre']);
-        $idUsuario = $usuario->getId();
+        $usuario = null;
+        $idUsuario = null;
 
+        // Busca el usuario actual si se ha iniciado sesión
+        if (isset($_SESSION['nombre'])) {
+            $usuario = Usuario::buscaUsuario($_SESSION['nombre']);
+            $idUsuario = $usuario->getId();    
+        }
+        
+      
         // Procesar los filtros
         $datos = $_GET; // Obtener los datos enviados por el formulario
         $resultadoFiltro = $this->procesaFormulario($datos); // Procesar los datos
-        $where = $resultadoFiltro['where'] ?? '';
-        $parametros = $resultadoFiltro['parametros'] ?? [];
+        $where = $resultadoFiltro['where'] ?? '';  // Obtener la cláusula WHERE
+        $parametros = $resultadoFiltro['parametros'] ?? []; // Obtener los parámetros 
 
-        // Para no mostrar los libros del usuario actual
-        if (!empty($where)) {
-            $where .= " AND idpropietario != ?";
-        } else {
-            $where = "WHERE idpropietario != ?";
+        // Para no mostrar los libros del usuario actual, si está registrado
+        if ($idUsuario !== null) {
+            if (!empty($where)) {
+                $where .= " AND idpropietario != ?";
+            } else {
+                $where = "WHERE idpropietario != ?";
+            }
+            $parametros[] = $idUsuario;
         }
-        $parametros[] = $idUsuario;
 
 
         // Construir la consulta SQL
@@ -130,6 +138,7 @@ class Filtro extends Formulario
                 $where";
         $stmt = $conn->prepare($sql);
 
+        // Vincular los parámetros
         if (!empty($parametros)) {
             $tipos = str_repeat('s', count($parametros)); // Asume que todos los parámetros son strings
             $stmt->bind_param($tipos, ...$parametros);
@@ -145,6 +154,8 @@ class Filtro extends Formulario
         }
 
         $stmt->close();
+        $result->free();
+        $conn->close();
         return $libros;
     }
 }

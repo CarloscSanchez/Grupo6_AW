@@ -150,6 +150,7 @@ class Libro
         }
 
         $stmt->close();
+        $result->free();
         return $libros_publicados;
     }
 
