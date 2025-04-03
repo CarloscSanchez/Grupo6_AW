@@ -1,7 +1,8 @@
 <?php
 
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/clases/productos/formularioSubirLibro.php';
+
+use \includes\clases\productos\formularioSubirLibro as FormularioSubirLibro;
 
 $form = new FormularioSubirLibro();
 $htmlFormSubirLibro = $form->gestiona();

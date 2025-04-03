@@ -1,5 +1,7 @@
 <?php
 
+namespace includes;
+
 /**
  * Clase base para la gestión de formularios.
  */

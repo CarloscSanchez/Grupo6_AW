@@ -1,6 +1,7 @@
 <?php
 require __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/clases/formularioContacto.php';
+
+use \includes\clases\formularioContacto as FormularioContacto;
 
 $tituloPagina = 'Contacto - BookSwap';
 

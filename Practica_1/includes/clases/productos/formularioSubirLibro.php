@@ -1,7 +1,12 @@
 <?php
-require_once __DIR__.'/../../formulario.php';
-require_once __DIR__.'/libro.php';
-require_once __DIR__.'/../usuarios/usuario.php';
+
+namespace includes\clases\productos;
+
+use \includes\formulario as Formulario;
+use \includes\clases\libros\libro;
+
+// require_once __DIR__.'/../usuarios/usuario.php';
+use includes\clases\usuarios\Usuario;
 
 class FormularioSubirLibro extends Formulario
 {

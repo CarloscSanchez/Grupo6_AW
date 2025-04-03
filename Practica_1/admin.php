@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/clases/usuarios/usuario.php';
-require_once __DIR__.'/includes/clases/productos/libro.php';
+
+use \includes\clases\productos\libro as Libro;
+use \includes\clases\usuarios\usuario as Usuario;
 
 // Verificar si el usuario es un administrador
 if (!isset($_SESSION['esAdmin']) || $_SESSION['esAdmin'] !== true) {

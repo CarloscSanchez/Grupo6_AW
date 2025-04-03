@@ -1,5 +1,8 @@
 <?php
-require_once __DIR__ . '/../formulario.php';
+
+namespace includes\clases;
+
+use \includes\formulario as Formulario;
 
 class FormularioContacto extends Formulario
 {

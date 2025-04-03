@@ -2,8 +2,7 @@
 
 require_once __DIR__.'/includes/config.php';
 
-// esto cambiarlo por namespace en un futuro
-require_once __DIR__.'/includes/clases/usuarios/formularioLogin.php';
+use \includes\clases\usuarios\formularioLogin;
 
 $form = new FormularioLogin();
 $htmlFormLogin = $form->gestiona();
@@ -18,7 +17,6 @@ $contenidoPrincipal = <<<EOS
             $htmlFormLogin
 
             <div class="extra-links">
-                <a href="recuperar_contraseña.php">¿Has olvidado tu contraseña?</a>
                 <br>
                 <a href="registro.php">¿Todavía no tienes cuenta? Regístrate</a>
             </div>

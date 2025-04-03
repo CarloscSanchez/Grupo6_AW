@@ -1,6 +1,9 @@
 <?php
-require_once __DIR__.'/../../formulario.php';
-require_once __DIR__.'/usuario.php';
+
+namespace includes\clases\usuarios;
+
+use \includes\formulario as Formulario;
+use \includes\clases\usuarios\usuario as Usuario;
 
 class FormularioRegistro extends Formulario
 {

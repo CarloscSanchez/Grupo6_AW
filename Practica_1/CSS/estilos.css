@@ -465,7 +465,6 @@ tr:hover {
     background-size: cover;
     color: #8cbdeec2;
     text-align: center;
-    padding: 50px ;
 }
 .hero h1 {
     font-size: 3em;
@@ -590,7 +589,6 @@ tr:hover {
 .cta {
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
     color: white;
-    padding: 40px;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     display: inline-block;

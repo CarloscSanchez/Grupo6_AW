@@ -1,5 +1,9 @@
 <?php
 
+namespace includes\clases\productos;
+
+use \includes\aplicacion as Aplicacion;
+
 class Libro
 {
     private $idlibro;
@@ -137,6 +141,7 @@ class Libro
         // Conexión a la base de datos
         $conn = Aplicacion::getInstance()->getConexionBd();
         
+
         // Consulta para obtener los libros del usuario
         $query = "SELECT * FROM libros WHERE idpropietario = ?";
         $stmt = $conn->prepare($query);

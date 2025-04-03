@@ -1,10 +1,11 @@
 <?php
 
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/clases/productos/formularioEditarLibro.php';
+
+use \includes\clases\productos\formularioEditarLibro as FormularioEditarLibro;
 
 $form = new FormularioEditarLibro();
-$htmlFormSubirLibro = $form->gestiona();
+$htmlFormEditarLibro = $form->gestiona();
 
 $tituloPagina = 'Editar un libro';
 

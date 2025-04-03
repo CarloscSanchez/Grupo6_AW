@@ -1,6 +1,11 @@
 <?php
-require_once __DIR__ . '/../../formulario.php';
-require_once __DIR__ . '/../../aplicacion.php';
+
+namespace includes\clases\productos;
+
+use \includes\formulario as Formulario;
+use \includes\aplicacion as Aplicacion;
+use \includes\clases\usuarios\usuario as Usuario;
+
 
 class Filtro extends Formulario
 {
