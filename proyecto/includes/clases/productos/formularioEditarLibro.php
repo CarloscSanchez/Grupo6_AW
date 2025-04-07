@@ -4,28 +4,41 @@ namespace includes\clases\productos;
 
 use \includes\formulario as Formulario;
 use \includes\clases\productos\libro as Libro;
-use \includes\clases\usuarios\usuario as Usuario;
 
 class FormularioEditarLibro extends Formulario
 {
+    private $libro;
+
     public function __construct() {
         parent::__construct(
-            'formEditarLibro',[
-                'urlRedireccion' => 'perfil.php', 
+            'formEditarLibro', [
+                'urlRedireccion' => 'perfil.php',
                 'enctype' => 'multipart/form-data'
             ]
         );
+
+        // Obtener el ID del libro desde la URL
+        $idLibro = $_GET['id'] ?? null;
+        if (!$idLibro) {
+            throw new \Exception("No se ha proporcionado un ID de libro.");
+        }
+        // Cargar los datos del libro
+        $this->libro = Libro::buscaPorId($idLibro);
+        if (!$this->libro) {
+            throw new \Exception("No se encontró el libro con ID: $idLibro");
+        }
     }
     
     protected function generaCamposFormulario(&$datos)
     {
-        $titulo = $datos['titulo'] ?? '';
-        $autor = $datos['autor'] ?? '';
-        $genero = $datos['genero'] ?? '';
-        $estado = $datos['estado'] ?? '';
-        $idioma = $datos['idioma'] ?? '';
-        $descripcion = $datos['descripcion'] ?? '';
-        $editorial = $datos['editorial'] ?? '';
+        // Si no hay datos en $datos, usa los datos del libro
+        $titulo = $datos['titulo'] ?? $this->libro->getTitulo();
+        $autor = $datos['autor'] ?? $this->libro->getAutor();
+        $genero = $datos['genero'] ?? $this->libro->getGenero();
+        $estado = $datos['estado'] ?? $this->libro->getEstado();
+        $idioma = $datos['idioma'] ?? $this->libro->getIdioma();
+        $descripcion = $datos['descripcion'] ?? $this->libro->getDescripcion();
+        $editorial = $datos['editorial'] ?? $this->libro->getEditorial();
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
@@ -111,7 +124,7 @@ class FormularioEditarLibro extends Formulario
 
             <div class="input-group">
                 <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion" value="$descripcion" required>
+                <textarea id="descripcion" name="descripcion" required>$descripcion</textarea>
                 {$erroresCampos['descripcion']}
             </div>
 
@@ -128,7 +141,7 @@ class FormularioEditarLibro extends Formulario
             </div>
 
             <div>
-                <button type="submit" class="btn-submit">Editar libro</button>
+                <button type="submit" class="btn-submit">Guardar cambios</button>
                 <button class="btn-cancel" type="button" onclick="window.location.href='perfil.php'">Cancelar</button>
             </div>
         </fieldset>
@@ -159,23 +172,30 @@ class FormularioEditarLibro extends Formulario
         if (!$editorial) $this->errores['editorial'] = 'La editorial no puede estar vacía.';
 
         // Validar imagen
-        $ruta_imagen = null;
+        $ruta_imagen = $this->libro->getImagen(); // Mantener la imagen actual si no se sube una nueva
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
             $nombre_imagen = basename($_FILES['foto']['name']);
             $ruta_imagen = 'img/' . $nombre_imagen; // Ruta completa al directorio de imágenes
             if (!move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_imagen)) {
                 $this->errores['foto'] = 'Error al mover la imagen al directorio de destino.';
             }
-        } else {
-            $this->errores['foto'] = 'Debes seleccionar una imagen válida.';
         }
-        // Si no hay errores, delegar la actualización del libro a la clase Libro
+
+        // Si no hay errores, actualizar el libro
         if (count($this->errores) === 0) {
-            $libro = Libro::buscaPorId($_GET['id']);
-            if (!$libro) {
-                $this->errores[] = "Error al editar el libro.";
+            // Actualizar los datos del libro con los nuevos valores utilizando el método setter
+            $this->libro->setTitulo($titulo);
+            $this->libro->setAutor($autor);
+            $this->libro->setGenero($genero);
+            $this->libro->setEstado($estado);
+            $this->libro->setIdioma($idioma);
+            $this->libro->setDescripcion($descripcion);
+            $this->libro->setEditorial($editorial);
+            $this->libro->setImagen($ruta_imagen);
+
+            if (!Libro::actualiza($this->libro)) {
+                $this->errores[] = "Error al actualizar el libro.";
             }
-            Libro::actualiza($libro);
         }
     }
 

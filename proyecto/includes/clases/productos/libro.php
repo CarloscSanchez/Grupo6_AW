@@ -247,4 +247,17 @@ class Libro
     public function getIdPropietario() { return $this->idpropietario; }
     public function getDisponible() { return $this->disponible; }
     public function getFechaPublicacion() { return $this->fecha_publicacion; }
+    // Setters
+    public function setTitulo($titulo) { $this->titulo = $titulo; }
+    public function setAutor($autor) { $this->autor = $autor; }
+    public function setGenero($genero) { $this->genero = $genero; }
+    public function setEditorial($editorial) { $this->editorial = $editorial; }
+    public function setIdioma($idioma) { $this->idioma = $idioma; }
+    public function setEstado($estado) { $this->estado = $estado; }
+    public function setDescripcion($descripcion) { $this->descripcion = $descripcion; }
+    public function setImagen($imagen) { $this->imagen = $imagen; }
+    public function setIdPropietario($idpropietario) { $this->idpropietario = $idpropietario; }
+    public function setDisponible($disponible) { $this->disponible = $disponible; }
+    public function setFechaPublicacion($fecha_publicacion) { $this->fecha_publicacion = $fecha_publicacion; }
+    
 }
