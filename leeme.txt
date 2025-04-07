@@ -1,1 +1,2 @@
-La funcionalidad que está 100% implementada es la gestión de libros, del resto únicamente están hechas las vistas.
+La funcionalidad que está 100% implementada es la "Gestión de libros"(practica 2).
+En esta práctica 3 hemos implementado al 100% la "Búsqueda avanzada y filtros".
