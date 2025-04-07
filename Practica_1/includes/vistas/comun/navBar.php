@@ -11,18 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <span>BookSwap</span>
         </a>
     </div>
-
-    <!-- Sección central: Enlaces de la web -->
-    <div class="navbar-links">
-        <ul>
-            <li><a href="detalles.php">Más detalles</a></li>
-            <li><a href="miembros.php">Conócenos</a></li>
-            <li><a href="contacto.php">¡Contáctanos!</a></li>
-            <li><a href="bocetos.php">Bocetos</a></li>
-            <li><a href="planificacion.php">Planificación</a></li>
-        </ul>
-    </div>
-
+    
     <!-- Sección derecha: Login/Register o LogOut/Profile -->
     <div class="navbar-right">
         <?php if (!isset($_SESSION['nombre'])): ?>
