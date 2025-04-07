@@ -3,7 +3,7 @@
 namespace includes\clases\productos;
 
 use \includes\formulario as Formulario;
-use \includes\clases\libros\libro;
+use \includes\clases\productos\libro as Libro;
 
 // require_once __DIR__.'/../usuarios/usuario.php';
 use includes\clases\usuarios\Usuario;
