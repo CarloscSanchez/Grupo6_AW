@@ -1,5 +1,7 @@
 <?php
 
+namespace includes\clases\productos;
+
 require __DIR__.'/includes/config.php';
 
 use \includes\aplicacion as Aplicacion;
@@ -45,21 +47,7 @@ if (isset($_GET['id'])) {
     $checkLibro->close();
 
     // Borrar el libro
-    $stmt = $conn->prepare("DELETE FROM libros WHERE idLibro = ?");
-    if (!$stmt) {
-        die("Error en la preparación del borrado: " . $conn->error);
-    }
-    $stmt->bind_param("s", $id);
-
-
-    if ($stmt->execute()) {
-        echo "Borrado exitoso. <a href='login.php'>Inicia sesión</a>";
-    } else {
-        echo "Error al borrar. Detalles: " . $stmt->error;
-    }
-
-    $stmt->close();
-    $conn->close();
+    $libro->borra($id);
 
     
     header("Location: perfil.php");

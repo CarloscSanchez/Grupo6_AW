@@ -159,6 +159,16 @@ class Libro
         return $libros_publicados;
     }
 
+    public static function verificaPropietario($idlibro, $idusuario) {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = "SELECT count(*) FROM libros WHERE idlibro = ? AND idpropietario = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ii", $idlibro, $idusuario);
+        $result = $stmt->execute();       
+        $stmt->close();
+        return $result;
+    }
+
     public static function actualiza($libro)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
