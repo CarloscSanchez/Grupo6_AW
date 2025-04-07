@@ -298,7 +298,7 @@ class Usuario
     
     public function guarda()
     {
-        if ($this->id !== null) {
+        if ($this->idusuario !== null) {
             return self::actualiza($this);
         }
         return self::inserta($this);
@@ -306,7 +306,7 @@ class Usuario
     
     public function borrate()
     {
-        if ($this->id !== null) {
+        if ($this->idusuario !== null) {
             return self::borra($this);
         }
         return false;
