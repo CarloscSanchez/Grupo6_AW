@@ -1,56 +1,30 @@
 <?php
 
-namespace includes\clases\productos;
+require __DIR__.'/../../config.php';
 
-require __DIR__.'/includes/config.php';
 
-use \includes\aplicacion as Aplicacion;
+use \includes\clases\productos\libro as Libro;
+use \includes\clases\usuarios\usuario as Usuario;
 
-// Crear la conexión
-$app = Aplicacion::getInstance();
-$conn = $app->getConexionBD();
+$id_libro = $_GET["id"] ?? null;
 
-// Verificar la conexión
-if ($conn->connect_errno) {
-    die("Error de conexión a la base de datos: " . $conn->connect_error);
-}
-
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+if ($id_libro) {
     $nombre = $_SESSION['nombre'];
 
-    $check = $conn->prepare("SELECT idusuario FROM usuarios WHERE nombre = ?");
-    if (!$check) {
-        die("Error en la preparación de la consulta: " . $conn->error);
-    }
-    $check->bind_param("s", $nombre);
-    $check->execute();
-    $check->store_result();
-    $check->bind_result($idUsuario); 
-    $check->fetch();    
-    $check->close();
+    $libro = Libro::buscaPorId($id_libro);
+    $usuario = Usuario::buscaUsuario($nombre);
 
     // Verificar que el libro pertenece al usuario antes de eliminarlo
-    $checkLibro = $conn->prepare("SELECT idLibro FROM libros WHERE idLibro = ? AND idpropietario = ?");
-    if (!$checkLibro) {
-        die("Error en la preparación de la consulta: " . $conn->error);
-    }
+    $checkPropietario = Libro::verificaPropietario($id_libro, $usuario->getId());
 
-    $checkLibro->bind_param("ii", $id , $idUsuario);
-    $checkLibro->execute();
-    $checkLibro->store_result();
-
-    if ($checkLibro->num_rows === 0) {
+    if ($checkPropietario === 0) {
         die("Error: No tienes permiso para eliminar este libro.");
     }
 
-    $checkLibro->close();
-
     // Borrar el libro
-    $libro->borra($id);
-
+    Libro::borra($id_libro);
     
-    header("Location: perfil.php");
+    header("Location: ../../../perfil.php");
     exit();
 } else{
     die("Error: No se ha proporcionado un ID de libro.");

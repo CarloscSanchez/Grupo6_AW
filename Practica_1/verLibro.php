@@ -24,7 +24,7 @@ if ($libro) {
             $acciones = <<<EOS
             <div class="acciones">
                 <button class="editar" onclick="window.location.href='editarLibro.php?id={$libro->getId()}'">Editar</button>
-                <button class="borrar" onclick="window.location.href='procesarBorrarLibro.php?id={$libro->getId()}'">Borrar</button>
+                <button class="borrar" onclick="window.location.href='includes/clases/productos/procesarBorrarLibro.php?id={$libro->getId()}'">Borrar</button>
             </div>
             EOS;
         } else {
