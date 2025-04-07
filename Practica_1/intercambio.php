@@ -1,6 +1,8 @@
 <?php
 require __DIR__.'/includes/config.php';
 
+use \includes\aplicacion as Aplicacion;
+
 // Crear la conexión
 $app = Aplicacion::getInstance();
 $conn = $app->getConexionBd();
