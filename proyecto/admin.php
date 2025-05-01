@@ -22,7 +22,7 @@ if ($usuarios) {
         $tabla_usuarios .= "<td>" . $usuario->getNombre() . "</td>";
         $tabla_usuarios .= "<td>" . $usuario->getCorreo() . "</td>";
         $tabla_usuarios .= "<td> normal </td>"; // Convertir array a cadena
-        $tabla_usuarios .= "<td><a href='eliminar_usuario.php?id=" . $usuario->getId() . "'>Eliminar</a></td>";
+        $tabla_usuarios .= "<td><a href='includes/clases/usuarios/eliminarUsuario.php?id=" . $usuario->getId() . "'>Eliminar</a></td>";
         $tabla_usuarios .= "</tr>";
     }
 } else {
@@ -40,7 +40,7 @@ if ($libros) {
         $tabla_libros .= "<td>" . $libro->getId() . "</td>";
         $tabla_libros .= "<td>" . $libro->getTitulo() . "</td>";
         $tabla_libros .= "<td>" . $libro->getAutor() . "</td>";
-        $tabla_libros .= "<td><a href='eliminar_libro.php?id=" . $libro->getId() . "'>Eliminar</a></td>";
+        $tabla_libros .= "<td><a href='includes/clases/productos/procesarBorrarLibro.php?id=" . $libro->getId() . "'>Eliminar</a></td>";
         $tabla_libros .= "</tr>";
     }
 } else {
@@ -48,11 +48,11 @@ if ($libros) {
 }
 
 $tituloPagina = 'BookSwap - Admin';
-
-$contenidoPrincipal=<<<EOS
-  <div class="admin-container">
-        <h2>Listado de Usuarios</h2>
-        <table>
+$contenidoPrincipal = <<<EOS
+<div class="admin-container">
+    <h2 class="admin-subtitle">Listado de Usuarios</h2>
+    <div class="admin-table-wrapper">
+        <table class="admin-table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -66,9 +66,11 @@ $contenidoPrincipal=<<<EOS
                 $tabla_usuarios
             </tbody>
         </table>
+    </div>
 
-        <h2>Listado de Libros</h2>
-        <table>
+    <h2 class="admin-subtitle">Listado de Libros</h2>
+    <div class="admin-table-wrapper">
+        <table class="admin-table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -82,6 +84,7 @@ $contenidoPrincipal=<<<EOS
             </tbody>
         </table>
     </div>
+</div>
 EOS;
 
 require __DIR__.'/includes/vistas/plantillas/plantilla.php';

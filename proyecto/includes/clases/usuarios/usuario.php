@@ -215,7 +215,7 @@ class Usuario
          * $result = self::borraRoles($usuario) !== false;
          */
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("DELETE FROM usuarios U WHERE U.idusuario = %d"
+        $query = sprintf("DELETE FROM usuarios WHERE idusuario = %d"
             , $idUsuario
         );
         if ( ! $conn->query($query) ) {
