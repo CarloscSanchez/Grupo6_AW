@@ -298,9 +298,9 @@ class Usuario
     
     public function guarda()
     {
-        if ($this->idusuario !== null) {
-            return self::actualiza($this);
-        }
+        //if ($this->idusuario !== null) {
+        //    return self::actualiza($this);
+        //}
         return self::inserta($this);
     }
     
