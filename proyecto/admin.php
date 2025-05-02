@@ -84,6 +84,9 @@ $contenidoPrincipal = <<<EOS
             </tbody>
         </table>
     </div>
+    <div class="add-event-button-wrapper">
+        <a href="subirEvento.php" class="admin-btn editar">Añadir Evento</a>
+    </div>
 </div>
 EOS;
 
