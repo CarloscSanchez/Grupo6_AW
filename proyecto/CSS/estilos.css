@@ -343,6 +343,12 @@ background-color: #e53935;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
 }
+
+.card.seleccionado {
+    background-color: gray;
+    border-color: #007bff;
+}
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -681,6 +687,13 @@ background-color: #e53935;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.aceptar-intercambio:disabled {
+    background-color: #666;
+    color: #ccc;
+    cursor: not-allowed;
+    border: 1px solid #999;
 }
 
 .rechazar-intercambio {

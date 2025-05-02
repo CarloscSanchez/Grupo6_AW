@@ -30,7 +30,7 @@ if ($libro) {
         } else {
             $acciones = <<<EOS
             <div class="acciones">
-                <button class="intercambiar" onclick="window.location.href='intercambiarLibro.php?id={$libro->getId()}'">Intercambiar</button>
+                <button class="intercambiar" onclick="window.location.href='crearIntercambio.php?id={$libro->getId()}'">Intercambiar</button>
             </div>
             EOS;
         }

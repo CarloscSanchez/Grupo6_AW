@@ -3,6 +3,7 @@ require_once __DIR__.'/includes/config.php';
 
 use \includes\clases\productos\libro as Libro;
 use \includes\clases\usuarios\usuario as Usuario;
+use \includes\clases\intercambios\intercambio as Intercambio;
 
 // Si es admin no le deja acceder
 if (isset($_SESSION['esAdmin']) && $_SESSION['esAdmin'] === true) {
@@ -75,13 +76,70 @@ $contenidoPrincipal .= <<<EOS
 
                 <div class='tab-content' id='content2'>
                     <div class='intercambios'>
-                        <p>No hay intercambios recibidos.</p>
+EOS;
+
+$intercambios_recibidos = Intercambio::buscaIntercambiosRecibidos($usuario->getId());
+
+if ($intercambios_recibidos) {
+    foreach ($intercambios_recibidos as $intercambio) {
+        $libro = Libro::buscaPorId($intercambio->getIdLibroSolicitado());
+        $usuarioSolicitante = Usuario::buscaPorId($intercambio->getIdSolicitante());
+                
+        $contenidoPrincipal .= <<<EOS
+            <div class="card" onclick="window.location.href='intercambiarLibro.php?id={$intercambio->getId()}'">
+                <img src="{$libro->getImagen()}" alt="{$libro->getTitulo()}">
+                <h3>{$libro->getTitulo()}</h3>
+                <p>Autor: {$libro->getAutor()}</p>
+                <p>Solicitante: {$usuarioSolicitante->getNombre()}</p>
+                <p>Estado: {$intercambio->getEstado()}</p>
+                <div class="generos">
+                    <span>{$libro->getGenero()}</span>
+                </div>
+            </div>
+EOS;
+    }
+} else {
+    $contenidoPrincipal .= <<<EOS
+        <p>No hay intercambios recibidos.</p>
+EOS;
+}
+
+
+$contenidoPrincipal .= <<<EOS
                     </div>
                 </div>
 
                 <div class='tab-content' id='content3'>
                     <div class='intercambios'>
-                        <p>No hay intercambios enviados.</p>
+EOS;
+
+
+$intercambios_enviados = Intercambio::buscaIntercambiosSolicitados($usuario->getId());
+
+if ($intercambios_enviados) {
+    foreach ($intercambios_enviados as $intercambio) {
+        $libro = Libro::buscaPorId($intercambio->getIdLibroSolicitado());
+        $usuarioPropietario = Usuario::buscaPorId($intercambio->getIdPropietario());
+        $contenidoPrincipal .= <<<EOS
+            <div class="card" onclick="window.location.href='intercambiarLibro.php?id={$intercambio->getId()}'">
+                <img src="{$libro->getImagen()}" alt="{$libro->getTitulo()}">
+                <h3>{$libro->getTitulo()}</h3>
+                <p>Autor: {$libro->getAutor()}</p>
+                <p>Propietario: {$usuarioPropietario->getNombre()}</p>
+                <p>Estado: {$intercambio->getEstado()}</p>
+                <div class="generos">
+                    <span>{$libro->getGenero()}</span>
+                </div>
+            </div>
+EOS;
+    }
+} else {
+    $contenidoPrincipal .= <<<EOS
+        <p>No hay intercambios recibidos.</p>
+EOS;
+}
+
+$contenidoPrincipal .= <<<EOS
                     </div>
                 </div>
 
