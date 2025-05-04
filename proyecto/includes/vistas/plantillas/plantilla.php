@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
     <title><?= $tituloPagina ?></title>
     <link rel="stylesheet" type="text/css" href="<?= RUTA_CSS ?>/estilos.css" />
+	<link rel="icon" type="image/png" href="img/logo_icono.ico">
+
 </head>
 <body>
 <div id="contenedor">

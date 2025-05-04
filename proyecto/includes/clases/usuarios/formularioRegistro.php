@@ -25,12 +25,16 @@ class FormularioRegistro extends Formulario
             <div class="input-group">
                 <label for="nombreUsuario">Nombre de Usuario</label>
                 <input type="text" id="nombreUsuario" name="nombreUsuario" value="$nombreUsuario" required>
+                    <span id="validUser"></span>
+
             $erroresCampos[nombreUsuario]
             </div>
 
             <div class="input-group">
                 <label for="email">Correo Electrónico</label>
                 <input type="email" id="email" name="email" required>   
+                	<span id="validEmail"></span>
+
                 {$erroresCampos['email']} 
             </div>
 

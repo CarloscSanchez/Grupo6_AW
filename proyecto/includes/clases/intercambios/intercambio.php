@@ -116,6 +116,7 @@ class Intercambio
         $stmt->bind_param("i", $id_usuario);
         $stmt->execute();
         $resultado = $stmt->get_result();
+        $stmt->close();
         $intercambios = [];
 
         while ($fila = $resultado->fetch_assoc()) {
@@ -143,6 +144,7 @@ class Intercambio
             error_log("Error al aceptar intercambio: " . $stmt->error);
             return false;
         }
+        $stmt->close();
     }
 
 

@@ -35,7 +35,7 @@ CREATE TABLE `intercambios` (
   `id_propietario` int(11) NOT NULL,
   `estado` enum('pendiente','aceptado','rechazado','completado','cancelado') NOT NULL DEFAULT 'pendiente',
   `fecha_intercambio` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE `libros` (
   `idpropietario` int(11) NOT NULL,
   `disponible` tinyint(4) NOT NULL DEFAULT 1,
   `fecha_publicacion` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 --
 -- Volcado de datos para la tabla `libros`
@@ -80,7 +80,7 @@ CREATE TABLE `usuarios` (
   `correo` varchar(256) NOT NULL,
   `contraseña` varchar(256) NOT NULL,
   `tipo` enum('admin','normal') NOT NULL DEFAULT 'normal'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -104,6 +104,20 @@ ALTER TABLE `intercambios`
   ADD KEY `intercambios_ibfk_2` (`id_libro_solicitado`),
   ADD KEY `intercambios_ibfk_3` (`id_solicitante`),
   ADD KEY `intercambios_ibfk_4` (`id_propietario`);
+
+
+--
+-- Estructura de tabla para la tabla `eventos`
+--
+
+CREATE TABLE eventos (
+    idevento INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    lugar VARCHAR(255) NOT NULL,
+    genero VARCHAR(100)
+);
 
 --
 -- Indices de la tabla `libros`
