@@ -63,7 +63,7 @@ if ($eventos) {
         $tabla_eventos .= "<td>" . $evento->getLugar() . "</td>";
         $tabla_eventos .= "<td>
             <a href='includes/clases/productos/procesarBorrarEvento.php?id=" . $evento->getId() . "'>Eliminar</a> |
-            <a href='includes/clases/productos/formularioEditarEvento.php?id=" . $evento->getId() . "'>Editar</a>
+            <a href='editarEvento.php?id=" . $evento->getId() . "'>Editar</a>
         </td>";
         $tabla_eventos .= "</tr>";
     }

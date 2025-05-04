@@ -2,6 +2,7 @@
 
 namespace includes\clases\productos;
 
+require_once __DIR__ . '/../../formulario.php';
 use \includes\formulario as Formulario;
 use \includes\clases\productos\Evento as Evento;
 
