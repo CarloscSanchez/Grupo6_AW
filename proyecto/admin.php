@@ -2,6 +2,7 @@
 require_once __DIR__.'/includes/config.php';
 
 use \includes\clases\productos\libro as Libro;
+use \includes\clases\productos\Evento as Evento;
 use \includes\clases\usuarios\usuario as Usuario;
 
 // Verificar si el usuario es un administrador
@@ -21,7 +22,7 @@ if ($usuarios) {
         $tabla_usuarios .= "<td>" . $usuario->getId() . "</td>";
         $tabla_usuarios .= "<td>" . $usuario->getNombre() . "</td>";
         $tabla_usuarios .= "<td>" . $usuario->getCorreo() . "</td>";
-        $tabla_usuarios .= "<td> normal </td>"; // Convertir array a cadena
+        $tabla_usuarios .= "<td> normal </td>";
         $tabla_usuarios .= "<td><a href='includes/clases/usuarios/eliminarUsuario.php?id=" . $usuario->getId() . "'>Eliminar</a></td>";
         $tabla_usuarios .= "</tr>";
     }
@@ -45,6 +46,29 @@ if ($libros) {
     }
 } else {
     $tabla_libros .= "<tr><td colspan='4'>No hay libros registrados.</td></tr>";
+}
+
+// Consultar la lista de eventos
+$eventos = Evento::getEventos();
+
+// Generar la tabla de eventos
+$tabla_eventos = '';
+if ($eventos) {
+    foreach ($eventos as $evento) {
+        $tabla_eventos .= "<tr>";
+        $tabla_eventos .= "<td>" . $evento->getId() . "</td>";
+        $tabla_eventos .= "<td>" . $evento->getNombre() . "</td>";
+        $tabla_eventos .= "<td>" . $evento->getFecha() . "</td>";
+        $tabla_eventos .= "<td>" . $evento->getHora() . "</td>";
+        $tabla_eventos .= "<td>" . $evento->getLugar() . "</td>";
+        $tabla_eventos .= "<td>
+            <a href='includes/clases/productos/procesarBorrarEvento.php?id=" . $evento->getId() . "'>Eliminar</a> |
+            <a href='includes/clases/productos/formularioEditarEvento.php?id=" . $evento->getId() . "'>Editar</a>
+        </td>";
+        $tabla_eventos .= "</tr>";
+    }
+} else {
+    $tabla_eventos .= "<tr><td colspan='6'>No hay eventos registrados.</td></tr>";
 }
 
 $tituloPagina = 'BookSwap - Admin';
@@ -84,6 +108,26 @@ $contenidoPrincipal = <<<EOS
             </tbody>
         </table>
     </div>
+
+    <h2 class="admin-subtitle">Listado de Eventos</h2>
+    <div class="admin-table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Lugar</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                $tabla_eventos
+            </tbody>
+        </table>
+    </div>
+
     <div class="add-event-button-wrapper">
         <a href="subirEvento.php" class="admin-btn editar">Añadir Evento</a>
     </div>
