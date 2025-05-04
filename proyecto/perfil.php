@@ -84,9 +84,22 @@ if ($intercambios_recibidos) {
     foreach ($intercambios_recibidos as $intercambio) {
         $libro = Libro::buscaPorId($intercambio->getIdLibroSolicitado());
         $usuarioSolicitante = Usuario::buscaPorId($intercambio->getIdSolicitante());
+
+        $estado = $intercambio->getEstado();
+        $id = $intercambio->getId();
+
+        // Cambia la URL según el estado
+        if ($estado === 'aceptado') {
+            $href = "completarIntercambio.php?id={$id}";
+        } elseif ($estado === 'pendiente') {
+            $href = "intercambiarLibro.php?id={$id}";
+        } else {
+            $href = "verIntercambio.php?id={$id}"; // O alguna otra página o acción según el estado
+        }
+
                 
         $contenidoPrincipal .= <<<EOS
-            <div class="card" onclick="window.location.href='intercambiarLibro.php?id={$intercambio->getId()}'">
+            <div class="card" onclick="window.location.href='{$href}'">
                 <img src="{$libro->getImagen()}" alt="{$libro->getTitulo()}">
                 <h3>{$libro->getTitulo()}</h3>
                 <p>Autor: {$libro->getAutor()}</p>

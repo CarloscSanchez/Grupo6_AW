@@ -3,6 +3,7 @@
 namespace includes\clases\intercambios;
 
 use \includes\aplicacion as Aplicacion;
+use \includes\clases\productos\Libro as Libro;
 
 class Intercambio
 {
@@ -23,7 +24,7 @@ class Intercambio
         $this->id_solicitante = $id_solicitante;
         $this->id_propietario = $id_propietario;
         $this->estado = $estado;
-        $this->fecha_intercambio = $fecha_intercambio ?? date('Y-m-d');
+        $this->fecha_intercambio = $fecha_intercambio;
     }
 
     public static function crea($id_libro_solicitado, $id_solicitante, $id_propietario)
@@ -39,16 +40,16 @@ class Intercambio
 
     private static function inserta($intercambio){
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "INSERT INTO intercambios (id_libro_ofrecido, id_libro_solicitado, id_solicitante, id_propietario, estado, fecha_intercambio) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO intercambios (id_libro_ofrecido, id_libro_solicitado, id_solicitante, id_propietario, fecha_intercambio) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($query);
         $stmt->bind_param(
-            "iiiisi",
+            "iiiis",
             $intercambio->id_libro_ofrecido,
             $intercambio->id_libro_solicitado,
             $intercambio->id_solicitante,
             $intercambio->id_propietario,
-            $intercambio->fecha_intercambio,
-            $intercambio->idintercambio
+            $intercambio->fecha_intercambio
+
         );
         if ($stmt->execute()) {
             $intercambio->idintercambio = $conn->insert_id;
@@ -87,7 +88,7 @@ class Intercambio
     public static function buscaIntercambiosRecibidos($id_usuario)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "SELECT * FROM intercambios WHERE id_propietario = ?";
+        $query = "SELECT * FROM intercambios WHERE id_propietario = ? AND estado NOT IN ('completado', 'rechazado', 'cancelado')";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $id_usuario);
         $stmt->execute();
@@ -111,7 +112,7 @@ class Intercambio
     public static function buscaIntercambiosSolicitados($id_usuario)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "SELECT * FROM intercambios WHERE id_solicitante = ?";
+        $query = "SELECT * FROM intercambios WHERE id_solicitante = ? AND estado NOT IN ('completado', 'rechazado', 'cancelado')";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $id_usuario);
         $stmt->execute();
@@ -133,19 +134,78 @@ class Intercambio
         return $intercambios;
     }
 
+    public static function buscaHistorialIntercambios($id_usuario)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = "SELECT * FROM intercambios WHERE (id_solicitante = ? OR id_propietario = ?) AND estado IN ('completado', 'rechazado', 'cancelado')";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ii", $id_usuario, $id_usuario);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $stmt->close();
+        $intercambios = [];
+
+        while ($fila = $resultado->fetch_assoc()) {
+            $intercambios[] = new Intercambio(
+                $fila['id_libro_solicitado'],
+                $fila['id_solicitante'],
+                $fila['id_propietario'],
+                $fila['estado'],
+                $fila['fecha_intercambio'],
+                $fila['idintercambio'],
+                $fila['id_libro_ofrecido']
+            );
+        }
+        return $intercambios;
+    }
+
     public static function aceptarIntercambio($id_libro, $idintercambio){
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = "UPDATE intercambios SET estado = 'aceptado',id_libro_ofrecido = ? WHERE idintercambio = ?";
+        $fecha = date('Y-m-d');
+        $query = "UPDATE intercambios SET estado = 'aceptado',id_libro_ofrecido = ?, fecha_intercambio = ? WHERE idintercambio = ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("ii", $id_libro, $idintercambio);
+        $stmt->bind_param("isi", $id_libro, $fecha, $idintercambio);
         if ($stmt->execute()) {
+            $stmt->close();
             return true;
         } else {
             error_log("Error al aceptar intercambio: " . $stmt->error);
+            $stmt->close();
             return false;
         }
-        $stmt->close();
     }
+
+    public static function cambiarEstadoIntercambio($idintercambio, $estado){
+
+        #Revisar
+        if($estado == 'completado'){
+            $intercambio = self::buscaPorId($idintercambio);
+            $libroSolicitado = Libro::buscaPorId($intercambio->getIdLibroSolicitado());
+            $libroOfrecido = Libro::buscaPorId($intercambio->getIdLibroOfrecido());
+
+            if ($libroSolicitado && $libroOfrecido) {
+                $libroSolicitado->setDisponible(false);
+                $libroOfrecido->setDisponible(false);
+        
+                Libro::actualiza($libroSolicitado);
+                Libro::actualiza($libroOfrecido);
+            }
+        }
+
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = "UPDATE intercambios SET estado = ? WHERE idintercambio = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("si", $estado, $idintercambio);
+        if ($stmt->execute()) {
+            $stmt->close();
+            return true;
+        } else {
+            error_log("Error al cancelar intercambio: " . $stmt->error);
+            $stmt->close();
+            return false;
+        }
+    }
+
 
 
     public function getId() { return $this->idintercambio; }

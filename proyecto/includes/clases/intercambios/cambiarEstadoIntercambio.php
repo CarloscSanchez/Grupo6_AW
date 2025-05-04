@@ -5,14 +5,13 @@ require __DIR__.'/../../config.php';
 
 use \includes\clases\intercambios\intercambio as Intercambio;
 
-$id_libro = $_GET["id_libro"] ?? null;
-$idintercambio = $_GET["id_intercambio"] ?? null;
+$idintercambio = $_GET["id"] ?? null;
+$estado = $_GET["estado"] ?? null;
 
-if ($id_libro && $idintercambio) {
-    $intercambio = Intercambio::buscaPorId($idintercambio);
+if ($idintercambio) {
 
-    $intercambio::aceptarIntercambio($id_libro, $idintercambio);
-
+    
+    Intercambio::cambiarEstadoIntercambio($idintercambio, $estado);
     
     header("Location: ../../../perfil.php");
     exit();

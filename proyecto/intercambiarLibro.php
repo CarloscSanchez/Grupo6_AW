@@ -97,7 +97,7 @@ if($propietario->getNombre() == $_SESSION['nombre']){
             <div class="acciones">
                 <input type="hidden" name="intercambio_id" value="{$intercambio->getId()}">
                 <button class="aceptar-intercambio" id=btnAceptar disabled=true>Aceptar intercambio</button>
-                <button class="rechazar-intercambio" onclick="window.location.href='perfil.php'">Rechazar intercambio</button>
+                <button class="rechazar-intercambio" onclick="window.location.href='includes/clases/intercambios/cambiarEstadoIntercambio.php?id={$intercambio->getId()}&estado=rechazado'">Rechazar intercambio</button>
             </div>
             <script src="js/intercambios.js"></script>
         </main> 
@@ -130,7 +130,7 @@ if($propietario->getNombre() == $_SESSION['nombre']){
                 </div>
             </section> 
             <div class="acciones">
-                <button class="rechazar-intercambio" onclick="window.location.href='cancelarIntercambio.php'">Rechazar intercambio</button>
+                <button class="rechazar-intercambio" onclick="window.location.href='includes/clases/intercambios/cambiarEstadoIntercambio.php?id={$intercambio->getId()}&estado=cancelado'">Cancelar intercambio</button>
             </div>
         </main> 
     EOS; 

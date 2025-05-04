@@ -1,0 +1,98 @@
+<?php
+require __DIR__.'/includes/config.php';
+
+use \includes\aplicacion as Aplicacion;
+use \includes\clases\productos\Libro as Libro;
+use \includes\clases\usuarios\usuario as Usuario;
+use \includes\clases\intercambios\intercambio as Intercambio;
+
+// Crear la conexión
+$app = Aplicacion::getInstance();
+$conn = $app->getConexionBd();
+
+
+// Verificar la conexión
+if ($conn->connect_errno) {
+    die("Error de conexión a la base de datos: " . $conn->connect_error);
+}
+
+$idIntercambio = $_GET['id'] ?? null;
+if (!$idIntercambio) {
+    throw new \Exception("No se ha proporcionado un ID de libro.");
+}
+// Cargar los datos del libro
+
+$intercambio = Intercambio::buscaPorId($idIntercambio);
+if (!$intercambio) {
+    throw new \Exception("No se encontró el intercambio con ID: $idIntercambio");
+}
+
+$libroSolicitado = Libro::buscaPorId($intercambio->getIdLibroSolicitado());
+if (!$libroSolicitado) {
+    throw new \Exception("No se encontró el libro con ID: {$libroSolicitado->getId()}");
+}
+$libroOfrecido = Libro::buscaPorId($intercambio->getIdLibroOfrecido());
+if (!$libroOfrecido) {
+    throw new \Exception("No se encontró el libro con ID: {$libroOfrecido->getId()}");
+}
+
+
+$solicitante = Usuario::buscaPorId($intercambio->getIdSolicitante());
+if (!$solicitante) {
+    throw new \Exception("No se encontró el usuario solicitante.");
+}
+$propietario = Usuario::buscaPorId($intercambio->getIdPropietario());
+if (!$propietario) {
+    throw new \Exception("No se encontró el propietario del libro.");
+}
+
+$tituloPagina = 'BookSwap - Intercambio de libro';
+
+$contenidoPrincipal=<<<EOS
+    <header>
+        <h1>Biblioteca Online</h1>
+    </header>
+    
+    <main>
+        <!-- Sección del libro solicitado -->
+        <section class="libro-solicitado">
+            <h1>Estado del intercambio: {$intercambio->getEstado()}</h1>
+            <h2>Libro Solicitado</h2>
+            <div class="card">
+                <img src="{$libroSolicitado->getImagen()}" alt="{$libroSolicitado->getTitulo()}">
+                <h2>{$libroSolicitado->getTitulo()}</h2>
+                <p><strong>Autor:</strong> {$libroSolicitado->getAutor()}</p>
+                <p>Solicitante: {$propietario->getNombre()}</p>
+                <div class="generos">
+                    <span> {$libroSolicitado->getGenero()} </span>                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección del libro ofrecido -->
+        <section class="libro-ofrecido">
+            <h2>Libro Ofrecido</h2>
+            <div class="card">
+                <img src="{$libroOfrecido->getImagen()}" alt="{$libroOfrecido->getTitulo()}">
+                <h2>{$libroOfrecido->getTitulo()}</h2>
+                <p><strong>Autor:</strong> {$libroOfrecido->getAutor()}</p>
+                <p>Solicitante: {$solicitante->getNombre()}</p>
+                <div class="generos">
+                    <span> {$libroOfrecido->getGenero()} </span>                    
+                </div>
+            </div>
+        </section>
+
+        <div class="acciones">
+            <button class="aceptar-intercambio" onclick="window.location.href='includes/clases/intercambios/cambiarEstadoIntercambio.php?id={$intercambio->getId()}&estado=completado'">Completar intercambio</button>
+            <button class="rechazar-intercambio" onclick="window.location.href='includes/clases/intercambios/cambiarEstadoIntercambio.php?id={$intercambio->getId()}&estado=cancelado'">Cancelar intercambio</button> 
+        </div>
+    </main> 
+EOS; 
+
+
+
+
+require __DIR__.'/includes/vistas/plantillas/plantilla.php';
+
+?>
