@@ -29,13 +29,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `intercambios` (
   `idintercambio` int(11) NOT NULL,
-  `id_libro_ofrecido` int(11) NOT NULL,
+  `id_libro_ofrecido` int(11) DEFAULT NULL,
   `id_libro_solicitado` int(11) NOT NULL,
   `id_solicitante` int(11) NOT NULL,
   `id_propietario` int(11) NOT NULL,
   `estado` enum('pendiente','aceptado','rechazado','completado','cancelado') NOT NULL DEFAULT 'pendiente',
-  `fecha_intercambio` date NOT NULL DEFAULT current_timestamp()
-);
+  `fecha_intercambio` date DEFAULT NULL
+) 
 
 -- --------------------------------------------------------
 
