@@ -131,7 +131,7 @@ class Filtro extends Formulario
             if (!empty($where)) {
                 $where .= " AND idpropietario != ?";
             } else {
-                $where = "WHERE idpropietario != ?";
+                $where = "WHERE idpropietario != ? AND disponible = 1";
             }
             $parametros[] = $idUsuario;
         }
