@@ -160,7 +160,6 @@ class Filtro extends Formulario
 
         $stmt->close();
         $result->free();
-        $conn->close();
         return $libros;
     }
 }
