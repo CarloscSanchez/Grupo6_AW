@@ -192,6 +192,17 @@ class Libro
         return $resultado;
     }
 
+    public static function cambiaPropietario($idlibro, $idpropietario)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = "UPDATE libros SET idpropietario = ? WHERE idlibro = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ii", $idpropietario, $idlibro);
+        $resultado = $stmt->execute();
+        $stmt->close();
+        return $resultado;
+    }
+
     public static function borra($idlibro)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();

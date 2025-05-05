@@ -177,7 +177,6 @@ class Intercambio
 
     public static function cambiarEstadoIntercambio($idintercambio, $estado){
 
-        #Revisar
         if($estado == 'completado'){
             $intercambio = self::buscaPorId($idintercambio);
             $libroSolicitado = Libro::buscaPorId($intercambio->getIdLibroSolicitado());
@@ -186,6 +185,11 @@ class Intercambio
             if ($libroSolicitado && $libroOfrecido) {
                 $libroSolicitado->setDisponible(false);
                 $libroOfrecido->setDisponible(false);
+                $libroSolicitadoPropietario = $libroSolicitado->getIdPropietario();
+                $libroOfrecidoPropietario = $libroOfrecido->getIdPropietario();
+
+                Libro::cambiaPropietario($libroSolicitado->getId(), $libroOfrecidoPropietario);
+                Libro::cambiaPropietario($libroOfrecido->getId(), $libroSolicitadoPropietario);
         
                 Libro::actualiza($libroSolicitado);
                 Libro::actualiza($libroOfrecido);
