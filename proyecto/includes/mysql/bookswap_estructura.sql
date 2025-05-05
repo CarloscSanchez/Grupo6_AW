@@ -35,7 +35,7 @@ CREATE TABLE `intercambios` (
   `id_propietario` int(11) NOT NULL,
   `estado` enum('pendiente','aceptado','rechazado','completado','cancelado') NOT NULL DEFAULT 'pendiente',
   `fecha_intercambio` date DEFAULT NULL
-) 
+) ;
 
 -- --------------------------------------------------------
 
