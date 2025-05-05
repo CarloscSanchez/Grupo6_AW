@@ -39,10 +39,19 @@ class FormularioEditarLibro extends Formulario
         $idioma = $datos['idioma'] ?? $this->libro->getIdioma();
         $descripcion = $datos['descripcion'] ?? $this->libro->getDescripcion();
         $editorial = $datos['editorial'] ?? $this->libro->getEditorial();
+        $disponible = $datos['editorial'] ?? $this->libro->getDisponible();
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
         $erroresCampos = self::generaErroresCampos(['titulo', 'autor', 'genero', 'estado', 'idioma', 'descripcion', 'editorial', 'foto'], $this->errores, 'span', array('class' => 'error'));
+
+         // Botón para cambiar disponibilidad
+        $botonDisponibilidad = '';
+        if (!$disponible) {
+            $botonDisponibilidad = <<<EOF
+                <button type="submit" name="cambiarDisponibilidad" class="btn-disponibilidad">Volver a poner disponible</button>
+            EOF;
+        }
 
         $html = <<<EOF
         $htmlErroresGlobales
@@ -139,9 +148,15 @@ class FormularioEditarLibro extends Formulario
                 <input type="file" id="foto" name="foto" accept="image/*">
                 {$erroresCampos['foto']}
             </div>
+            
+            <div class="input-group">
+                <p> Actualmente el libro está <strong>{$this->libro->getDisponible() ? 'disponible' : 'no disponible'}</strong>.</p>    
 
-            <div>
+            </div> 
+
+            <div class="button-group">
                 <button type="submit" class="btn-submit">Guardar cambios</button>
+                $botonDisponibilidad
                 <button class="btn-cancel" type="button" onclick="window.location.href='perfil.php'">Cancelar</button>
             </div>
         </fieldset>

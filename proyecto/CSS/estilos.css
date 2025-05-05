@@ -425,6 +425,13 @@ background-color: #e53935;
     border-radius: 5px;
 }
 
+.button-group {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    gap: 10px; /* Espaciado entre los botones */
+    margin-top: 20px; /* Espaciado superior opcional */
+}
+
 .form-container .btn-submit {
     padding: 10px 20px;
     background-color: #28a745;
@@ -448,6 +455,19 @@ background-color: #e53935;
 }
 .form-container .btn-cancel:hover {
     background-color: #601515;
+}
+
+.form-container .btn-disponibilidad {
+    padding: 10px 20px;
+    background-color: #7425ea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+}
+.form-container .btn-disponibilidad:hover {
+    background-color: #111542;
 }
 
 #preview {
