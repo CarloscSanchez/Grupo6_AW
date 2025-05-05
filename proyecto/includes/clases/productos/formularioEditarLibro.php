@@ -39,7 +39,9 @@ class FormularioEditarLibro extends Formulario
         $idioma = $datos['idioma'] ?? $this->libro->getIdioma();
         $descripcion = $datos['descripcion'] ?? $this->libro->getDescripcion();
         $editorial = $datos['editorial'] ?? $this->libro->getEditorial();
-        $disponible = $datos['editorial'] ?? $this->libro->getDisponible();
+        $disponible = $datos['disponible'] ?? $this->libro->getDisponible();
+
+        $checkedDisponible = $disponible ? 'checked' : '';
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
@@ -141,11 +143,11 @@ class FormularioEditarLibro extends Formulario
                 {$erroresCampos['foto']}
             </div>
             
-            <div class="input-group">
+            <div class="input-group" style="display: flex; align-items: center;">
                 <label for="disponible">Disponible:</label>
-                <input type="text" id="disponible" name="disponible" value="$disponible" required>
+                <input type="checkbox" id="disponible" name="disponible" value="1" class="checkbox-personalizado" $checkedDisponible>
                 {$erroresCampos['disponible']}
-            </div> 
+            </div>
 
             <div class="button-group">
                 <button type="submit" class="btn-submit">Guardar cambios</button>
@@ -169,7 +171,7 @@ class FormularioEditarLibro extends Formulario
         $idioma = htmlspecialchars(trim($datos['idioma'] ?? ''));
         $descripcion = htmlspecialchars(trim($datos['descripcion'] ?? ''));
         $editorial = htmlspecialchars(trim($datos['editorial'] ?? ''));
-        $disponible = htmlspecialchars(trim($datos['disponible'] ?? ''));
+        $disponible = isset($datos['disponible']) ? 1 : 0;
 
         if (!$titulo) $this->errores['titulo'] = 'El título no puede estar vacío.';
         if (!$autor) $this->errores['autor'] = 'El autor no puede estar vacío.';

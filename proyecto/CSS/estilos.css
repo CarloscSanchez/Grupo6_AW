@@ -121,6 +121,7 @@ body .login-body{
     text-align: left;
 }
 
+
 .input-group label {
     display: block;
     font-weight: bold;
@@ -131,6 +132,13 @@ body .login-body{
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 10px;
+}
+
+.checkbox-formulario {
+    width: auto;
+    padding: 0;
+    border: none;
+    border-radius: 0;
 }
 
 /* Botón de login */
