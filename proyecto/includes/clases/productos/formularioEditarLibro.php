@@ -43,15 +43,7 @@ class FormularioEditarLibro extends Formulario
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
-        $erroresCampos = self::generaErroresCampos(['titulo', 'autor', 'genero', 'estado', 'idioma', 'descripcion', 'editorial', 'foto'], $this->errores, 'span', array('class' => 'error'));
-
-         // Botón para cambiar disponibilidad
-        $botonDisponibilidad = '';
-        if (!$disponible) {
-            $botonDisponibilidad = <<<EOF
-                <button type="submit" name="cambiarDisponibilidad" class="btn-disponibilidad">Volver a poner disponible</button>
-            EOF;
-        }
+        $erroresCampos = self::generaErroresCampos(['titulo', 'autor', 'genero', 'estado', 'idioma', 'descripcion', 'editorial', 'foto', 'disponible'], $this->errores, 'span', array('class' => 'error'));
 
         $html = <<<EOF
         $htmlErroresGlobales
@@ -150,13 +142,13 @@ class FormularioEditarLibro extends Formulario
             </div>
             
             <div class="input-group">
-                <p> Actualmente el libro está <strong>{$this->libro->getDisponible() ? 'disponible' : 'no disponible'}</strong>.</p>    
-
+                <label for="disponible">Disponible:</label>
+                <input type="text" id="disponible" name="disponible" value="$disponible" required>
+                {$erroresCampos['disponible']}
             </div> 
 
             <div class="button-group">
                 <button type="submit" class="btn-submit">Guardar cambios</button>
-                $botonDisponibilidad
                 <button class="btn-cancel" type="button" onclick="window.location.href='perfil.php'">Cancelar</button>
             </div>
         </fieldset>
@@ -177,6 +169,7 @@ class FormularioEditarLibro extends Formulario
         $idioma = htmlspecialchars(trim($datos['idioma'] ?? ''));
         $descripcion = htmlspecialchars(trim($datos['descripcion'] ?? ''));
         $editorial = htmlspecialchars(trim($datos['editorial'] ?? ''));
+        $disponible = htmlspecialchars(trim($datos['disponible'] ?? ''));
 
         if (!$titulo) $this->errores['titulo'] = 'El título no puede estar vacío.';
         if (!$autor) $this->errores['autor'] = 'El autor no puede estar vacío.';
@@ -207,6 +200,7 @@ class FormularioEditarLibro extends Formulario
             $this->libro->setDescripcion($descripcion);
             $this->libro->setEditorial($editorial);
             $this->libro->setImagen($ruta_imagen);
+            $this->libro->setDisponible($disponible);
 
             if (!Libro::actualiza($this->libro)) {
                 $this->errores[] = "Error al actualizar el libro.";

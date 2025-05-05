@@ -135,6 +135,13 @@ class Filtro extends Formulario
             }
             $parametros[] = $idUsuario;
         }
+        else {
+            if (!empty($where)) {
+                $where .= " AND disponible = 1";
+            } else {
+                $where = "WHERE disponible = 1";
+            }
+        }
 
 
         // Construir la consulta SQL
