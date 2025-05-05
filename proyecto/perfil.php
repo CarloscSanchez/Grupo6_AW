@@ -52,6 +52,9 @@ $contenidoPrincipal = <<<EOS
                 <input type='radio' name='tab' id='tab3'>
                 <label for='tab3'>Intercambios enviados</label>
 
+                <input type='radio' name='tab' id='tab4'>
+                <label for='tab4'>Historial de intercambios</label>
+
                 <div class='tab-content' id='content1'>
                     <div class='libros-publicados'>
 EOS;
@@ -163,6 +166,41 @@ EOS;
         <p>No hay intercambios recibidos.</p>
 EOS;
 }
+
+$historial_intercambios = Intercambio::buscaHistorialIntercambios($usuario->getId());
+
+
+$contenidoPrincipal .= <<<EOS
+                    </div>
+                </div>
+
+                <div class='tab-content' id='content4'>
+                    <div class='intercambios'>
+EOS;
+
+if ($historial_intercambios) {
+    foreach ($historial_intercambios as $intercambio) {
+        $libro = Libro::buscaPorId($intercambio->getIdLibroSolicitado());
+        $usuarioOtro = ($intercambio->getIdSolicitante() === $usuario->getId())
+            ? Usuario::buscaPorId($intercambio->getIdPropietario())
+            : Usuario::buscaPorId($intercambio->getIdSolicitante());
+
+        $contenidoPrincipal .= <<<EOS
+            <div class="card">
+                <img src="{$libro->getImagen()}" alt="{$libro->getTitulo()}">
+                <h3>{$libro->getTitulo()}</h3>
+                <p>Intercambiado con: {$usuarioOtro->getNombre()}</p>
+                <p>Estado: {$intercambio->getEstado()}</p>
+                <p>Fecha: {$intercambio->getFechaIntercambio()}</p>
+            </div>
+EOS;
+    }
+} else {
+    $contenidoPrincipal .= <<<EOS
+        <p>No hay intercambios completados.</p>
+EOS;
+}
+
 
 $contenidoPrincipal .= <<<EOS
                     </div>
