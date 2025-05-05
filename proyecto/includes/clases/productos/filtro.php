@@ -129,9 +129,9 @@ class Filtro extends Formulario
         // Para no mostrar los libros del usuario actual, si está registrado
         if ($idUsuario !== null) {
             if (!empty($where)) {
-                $where .= " AND idpropietario != ?";
+                $where .= " AND idpropietario != ? AND disponible = 1";
             } else {
-                $where = "WHERE idpropietario != ?";
+                $where = "WHERE idpropietario != ? AND disponible = 1";
             }
             $parametros[] = $idUsuario;
         }
