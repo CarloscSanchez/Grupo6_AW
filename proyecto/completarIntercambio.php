@@ -48,15 +48,22 @@ if (!$propietario) {
 
 $tituloPagina = 'BookSwap - Intercambio de libro';
 
+
+$fecha = $intercambio->getFechaIntercambio();
+if(!$fecha){
+    $fecha = 'No se ha establecido una fecha para este intercambio.';
+}
+
 $contenidoPrincipal=<<<EOS
     <header>
         <h1>Biblioteca Online</h1>
+        <h2>Estado del intercambio: {$intercambio->getEstado()}</h2>
+        <h2>Fecha: {$fecha}</h2>
     </header>
     
     <main>
         <!-- Sección del libro solicitado -->
         <section class="libro-solicitado">
-            <h1>Estado del intercambio: {$intercambio->getEstado()}</h1>
             <h2>Libro Solicitado</h2>
             <div class="card">
                 <img src="{$libroSolicitado->getImagen()}" alt="{$libroSolicitado->getTitulo()}">
@@ -70,7 +77,7 @@ $contenidoPrincipal=<<<EOS
         </section>
 
         <!-- Sección del libro ofrecido -->
-        <section class="libro-ofrecido">
+        <section class="libros-disponibles">
             <h2>Libro Ofrecido</h2>
             <div class="card">
                 <img src="{$libroOfrecido->getImagen()}" alt="{$libroOfrecido->getTitulo()}">

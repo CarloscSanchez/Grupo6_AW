@@ -181,6 +181,8 @@ EOS;
 if ($historial_intercambios) {
     foreach ($historial_intercambios as $intercambio) {
         $libro = Libro::buscaPorId($intercambio->getIdLibroSolicitado());
+        $id = $intercambio->getId();
+        $estado = $intercambio->getEstado();
         $usuarioOtro = ($intercambio->getIdSolicitante() === $usuario->getId())
             ? Usuario::buscaPorId($intercambio->getIdPropietario())
             : Usuario::buscaPorId($intercambio->getIdSolicitante());
