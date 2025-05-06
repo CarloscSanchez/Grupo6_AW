@@ -72,11 +72,11 @@ foreach ($libros_publicados as $libro) {
 
 $contenidoPrincipal .= <<<EOS
             </div>
-        </section> 
         <div class="acciones">
             <button class="aceptar-intercambio" onclick="window.location.href='includes/clases/intercambios/procesarSubidaIntercambio.php?id={$libroSolicitado->getId()}'">Crear intercambio</button>
             <button class="rechazar-intercambio" onclick="window.location.href='catalogo.php'">Cancelar intercambio</button>
         </div>
+        </section> 
     </main> 
 EOS; 
 

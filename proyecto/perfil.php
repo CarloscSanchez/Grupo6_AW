@@ -149,7 +149,7 @@ if ($intercambios_enviados) {
 
 
         $contenidoPrincipal .= <<<EOS
-            <div class="card" onclick="window.location.href='{$href}''">
+            <div class="card" onclick="window.location.href='{$href}'">
                 <img src="{$libro->getImagen()}" alt="{$libro->getTitulo()}">
                 <h3>{$libro->getTitulo()}</h3>
                 <p>Autor: {$libro->getAutor()}</p>
@@ -185,8 +185,17 @@ if ($historial_intercambios) {
             ? Usuario::buscaPorId($intercambio->getIdPropietario())
             : Usuario::buscaPorId($intercambio->getIdSolicitante());
 
+        if ($estado === 'aceptado') {
+            $href = "completarIntercambio.php?id={$id}";
+        } elseif ($estado === 'pendiente') {
+            $href = "intercambiarLibro.php?id={$id}";
+        } else {
+            $href = "verIntercambio.php?id={$id}";
+        }
+    
+
         $contenidoPrincipal .= <<<EOS
-            <div class="card">
+            <div class="card" onclick="window.location.href='{$href}'">
                 <img src="{$libro->getImagen()}" alt="{$libro->getTitulo()}">
                 <h3>{$libro->getTitulo()}</h3>
                 <p>Intercambiado con: {$usuarioOtro->getNombre()}</p>

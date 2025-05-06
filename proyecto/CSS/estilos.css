@@ -477,7 +477,7 @@ background-color: #e53935;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -506,16 +506,46 @@ background-color: #e53935;
     margin-right: 5px;
     display: inline-block;
 }
+
+
 .acciones {
-    margin-top: 20px;
+    margin: 30px 0;
+    display: flex;
+    gap: 15px;
+    background-color: #ffffff;
 }
+
 .acciones button {
-    padding: 10px 20px;
-    margin-right: 10px;
+    padding: 12px 24px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.acciones .aceptar-intercambio {
+    background-color: #28a745;
+    color: white;
+}
+
+.acciones .aceptar-intercambio:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.acciones .rechazar-intercambio {
+    background-color: #bc0c0c;
+    color: white;
+}
+
+.acciones .rechazar-intercambio:hover {
+    background-color: #ac0c0c;
+    transform: translateY(-2px);
+}
+
 .acciones .editar {
     background-color: #ffc107;
     color: black;
@@ -539,6 +569,8 @@ background-color: #e53935;
 .acciones .intercambiar:hover{
     background-color: #6a2297;
 }
+
+
 
 .hero {
     background-color: #f9fafc;
@@ -878,4 +910,56 @@ background-color: #e53935;
     font-size: 0.95em;
     margin: 5px 0;
     color: #2d3436;
+}
+
+/* Estilo del encabezado */
+header {
+    background-color: #ffffff;
+    padding: 20px 20px 20px; 
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3em;
+    color: #343a40;
+    font-weight: bold;
+}
+
+header h2 {
+    margin: 10px;
+    font-size: 2em;
+    color: #343a40;
+    font-weight: bold;
+}
+
+
+/* Estilo para la sección del libro solicitado */
+.libro-solicitado {
+    padding: 40px 20px;
+    background-color: #ffffff;
+}
+
+.libro-solicitado h2 {
+    font-size: 1.8em;
+    color: #343a40;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #6c63ff;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+/* Estilo para la sección de libros disponibles */
+.libros-disponibles {
+    padding: 40px 20px;
+    background-color: #ffffff;
+}
+
+.libros-disponibles h2 {
+    font-size: 1.8em;
+    color: #343a40;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #6c63ff;
+    display: inline-block;
+    padding-bottom: 5px;
 }

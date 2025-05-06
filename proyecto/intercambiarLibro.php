@@ -45,12 +45,12 @@ $tituloPagina = 'BookSwap - Intercambio de libro';
 $contenidoPrincipal=<<<EOS
     <header>
         <h1>Biblioteca Online</h1>
+        <h2>Estado del intercambio: {$intercambio->getEstado()}</h2>
     </header>
     
     <main>
         <!-- Sección del libro solicitado -->
         <section class="libro-solicitado">
-            <h1>Estado del intercambio: {$intercambio->getEstado()}</h1>
             <h2>Libro Solicitado</h2>
             <div class="card">
                 <img src="{$libroSolicitado->getImagen()}" alt="{$libroSolicitado->getTitulo()}">
@@ -93,12 +93,13 @@ if($propietario->getNombre() == $_SESSION['nombre']){
 
     $contenidoPrincipal .= <<<EOS
                 </div>
-            </section> 
             <div class="acciones">
                 <input type="hidden" name="intercambio_id" value="{$intercambio->getId()}">
                 <button class="aceptar-intercambio" id=btnAceptar disabled=true>Aceptar intercambio</button>
                 <button class="rechazar-intercambio" onclick="window.location.href='includes/clases/intercambios/cambiarEstadoIntercambio.php?id={$intercambio->getId()}&estado=rechazado'">Rechazar intercambio</button>
             </div>
+            
+            </section> 
             <script src="js/intercambios.js"></script>
         </main> 
     EOS; 
@@ -128,10 +129,10 @@ if($propietario->getNombre() == $_SESSION['nombre']){
 
     $contenidoPrincipal .= <<<EOS
                 </div>
-            </section> 
             <div class="acciones">
                 <button class="rechazar-intercambio" onclick="window.location.href='includes/clases/intercambios/cambiarEstadoIntercambio.php?id={$intercambio->getId()}&estado=cancelado'">Cancelar intercambio</button>
             </div>
+            </section> 
         </main> 
     EOS; 
 

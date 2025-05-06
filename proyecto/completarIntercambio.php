@@ -81,12 +81,12 @@ $contenidoPrincipal=<<<EOS
                     <span> {$libroOfrecido->getGenero()} </span>                    
                 </div>
             </div>
-        </section>
 
         <div class="acciones">
             <button class="aceptar-intercambio" onclick="window.location.href='includes/clases/intercambios/cambiarEstadoIntercambio.php?id={$intercambio->getId()}&estado=completado'">Completar intercambio</button>
             <button class="rechazar-intercambio" onclick="window.location.href='includes/clases/intercambios/cambiarEstadoIntercambio.php?id={$intercambio->getId()}&estado=cancelado'">Cancelar intercambio</button> 
         </div>
+        </section>
     </main> 
 EOS; 
 
