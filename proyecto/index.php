@@ -39,13 +39,14 @@ $contenidoPrincipal = <<<EOS
             <p>Descubre cientos de libros en diferentes géneros y encuentra tu próxima lectura favorita.</p>
             <button onclick="window.location.href='catalogo.php'">Ver Catálogo</button>
     </div>
-</div>
 
-<div class="proximos-eventos">
-    <h2>Próximos Eventos</h2>
-    <div class="carousel">
-        $eventosHtml
+    <div class="proximos-eventos">
+        <h2>Próximos Eventos</h2>
+        <div class="carousel">
+            $eventosHtml
+        </div>
     </div>
+
 </div>
 EOS;
 

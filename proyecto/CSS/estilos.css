@@ -541,20 +541,23 @@ background-color: #e53935;
 }
 
 .hero {
-    background-image: url('../img/fondo_index.jpeg');
-    background-size: cover;
-    color: #8cbdeec2;
+    background-color: #f9fafc;
+    color: #2d3436;
     text-align: center;
+    padding: 10px 20px 60px;
+    border-bottom: 1px solid #e0e0e0; 
 }
 .hero h1 {
-    font-size: 3em;
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #2c3e50;
 }
 .hero p {
-    font-size: 1.2em;
-    margin: 10px 0 0;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+    color: #555;
 }
 
 .catalogo-contenedor {
@@ -666,28 +669,6 @@ background-color: #e53935;
 #tab3:checked ~ #content3,
 #tab4:checked ~ #content4 {
     display: block;
-}
-.cta {
-    background: linear-gradient(135deg, #ff7eb3, #ff758c);
-    color: white;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    display: inline-block;
-    text-align: center;
-    width: 100%;
-    margin: 20px auto;
-}
-
-.cta button {
-    padding: 15px 25px;
-    font-size: 18px;
-    color: white;
-    background-color: #ffc107;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .aceptar-intercambio {
@@ -813,92 +794,88 @@ background-color: #e53935;
     background-color: #0056b3;
 }
 
-
-.proximos-eventos {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    padding: 20px;
-    background-color: #f9f9f9;
+.cta {
+    background: #eaeef6; 
+    color: #2d3436;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    margin: 40px auto;
+    text-align: center;
 }
 
+.cta h2 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: #37474f;
+}
+
+.cta p {
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.cta button {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #6c5ce7; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta button:hover {
+    background-color: #5a4acb;
+}
+
+/* PRÓXIMOS EVENTOS */
+.proximos-eventos {
+    margin: 40px auto;
+    padding: 30px 20px;
+    background-color: #eaeef6;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 1000px;
+}
 .proximos-eventos h2 {
-    font-size: 28px;
+    font-size: 2em;
     margin-bottom: 20px;
     text-align: center;
-    color: #333;
-    font-weight: bold;
+    color: #2d3436;
 }
 
+/* CARRUSEL */
 .carousel {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 20px;
     padding: 10px;
-    position: relative;
 }
-
 .carousel::-webkit-scrollbar {
-    display: none; /* Oculta la barra de desplazamiento */
+    display: none;
 }
-
 .evento {
+    min-width: 250px;
     flex: 0 0 auto;
-    scroll-snap-align: center;
-    min-width: 300px;
-    max-width: 300px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    background-color: #fff;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    scroll-snap-align: start;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: left;
 }
-
-.evento:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
 .evento h3 {
-    margin: 0 0 10px;
-    font-size: 22px;
-    color: #007bff;
-    font-weight: bold;
+    font-size: 1.2em;
+    color: #6c5ce7;
+    margin-bottom: 10px;
 }
-
 .evento p {
+    font-size: 0.95em;
     margin: 5px 0;
-    font-size: 14px;
-    color: #555;
-}
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
-    border-radius: 50%;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-}
-
-.carousel-btn:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.carousel-btn.prev {
-    left: 10px;
-}
-
-.carousel-btn.next {
-    right: 10px;
+    color: #2d3436;
 }
