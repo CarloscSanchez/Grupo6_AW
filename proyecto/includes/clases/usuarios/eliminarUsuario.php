@@ -5,6 +5,11 @@ use \includes\clases\usuarios\usuario as Usuario;
 
 $id_usuario = $_GET["id"] ?? null;
 
+// Verificar si el usuario es un administrador
+if (!isset($_SESSION['esAdmin']) || $_SESSION['esAdmin'] !== true) {
+    header("Location: index.php");
+    exit();
+}
 if ($id_usuario) {
     // Verificar si el usuario existe
     $usuario = Usuario::buscaPorId($id_usuario);
