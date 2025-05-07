@@ -4,13 +4,23 @@ require __DIR__.'/../../config.php';
 
 
 use \includes\clases\intercambios\intercambio as Intercambio;
+use \includes\clases\usuarios\usuario as Usuario;
 
 $idintercambio = $_GET["id"] ?? null;
 $estado = $_GET["estado"] ?? null;
 
+$usuario = Usuario::buscaUsuario($_SESSION['nombre']);
+$idUsuario = $usuario->getId();
+
 if ($idintercambio) {
 
-    
+    // Comprobación de que el usuario es el solicitante del intercambio
+    $interc = Intercambio::buscaPorId($idintercambio);
+    if ($idUsuario != $interc->getIdSolicitante()) {
+        header("Location: index.php");
+        exit();
+    }
+
     Intercambio::cambiarEstadoIntercambio($idintercambio, $estado);
     
     header("Location: ../../../perfil.php");
