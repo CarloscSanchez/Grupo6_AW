@@ -14,9 +14,9 @@ $idUsuario = $usuario->getId();
 
 if ($idintercambio) {
 
-    // Comprobación de que el usuario es el solicitante del intercambio
+    // Comprobación de que el usuario es el solicitante o el solicitado del intercambio
     $interc = Intercambio::buscaPorId($idintercambio);
-    if ($idUsuario != $interc->getIdSolicitante()) {
+    if ($idUsuario != $interc->getIdSolicitante() && $idUsuario != $interc->getIdPropietario()) {
         header("Location: index.php");
         exit();
     }
