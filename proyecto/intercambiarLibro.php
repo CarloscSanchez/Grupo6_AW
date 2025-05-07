@@ -100,7 +100,7 @@ if($propietario->getNombre() == $_SESSION['nombre']){
             </div>
             
             </section> 
-            <script src="js/intercambios.js"></script>
+            <script src="JS/intercambios.js"></script>
         </main> 
     EOS; 
 } else{
