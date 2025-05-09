@@ -97,6 +97,9 @@ class FormularioUsuario extends Formulario
                 $this->errores[] = 'Error al actualizar los datos del usuario.';
             } else {
                 // Redirigir al perfil después de guardar los cambios
+                if (isset($_SESSION['nombre'])) {
+                    unset($_SESSION['nombre']);
+                }
                 $_SESSION['nombre'] =$nombreUsuario;
                 header('Location: perfil.php');
                 exit();
