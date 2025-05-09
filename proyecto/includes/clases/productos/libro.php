@@ -66,6 +66,8 @@ class Libro
                 $fila['idlibro']
             );
         }
+        $result->free(); // Liberar memoria
+
         $stmt->close();
         return $libros;
     }
@@ -79,6 +81,7 @@ class Libro
         $stmt->execute();
         $result = $stmt->get_result();
         $fila = $result->fetch_assoc();
+        $result->free(); // Liberar memoria
         $stmt->close();
 
         if ($fila) {
@@ -125,6 +128,7 @@ class Libro
                 $fila['idlibro']
             );
         }
+        $result->free(); // Liberar memoria
         $stmt->close();
         return $libros;
     }
@@ -154,8 +158,8 @@ class Libro
             $libros_publicados[] = $libro;
         }
 
-        $stmt->close();
         $result->free();
+        $stmt->close();
         return $libros_publicados;
     }
 
