@@ -72,12 +72,11 @@ class Filtro extends Formulario
 
         // Generar el formulario
         return <<<EOF
-            <form method="get" action="">
                 <input type="text" name="buscar" placeholder="Buscar por título o autor" value="$buscar">
                 <h3>Géneros</h3>
                 $htmlGeneros
                 <button type="submit">Aplicar filtros</button>
-            </form>
+           
         EOF;
     }
 

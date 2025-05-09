@@ -35,7 +35,7 @@ $contenidoPrincipal = <<<EOS
         <div class='foto-perfil'>
             <img src='img/logo5_AW.jpg' alt='Foto de perfil'>
             <p class='nombre-usuario'>$nombreUsuario</p>
-            <button>Cambiar foto de perfil</button>
+            <button onclick="window.location.href='editarPerfil.php'">Editar Perfil</button>        
         </div>
 
         <!-- Información del usuario -->

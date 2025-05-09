@@ -36,7 +36,6 @@ $contenidoPrincipal=<<<EOS
         <h1>Biblioteca Online</h1>
     </header>
     
-    <main>
         <!-- Sección del libro solicitado -->
         <section class="libro-solicitado">
             <h2>Libro Solicitado</h2>
@@ -77,7 +76,6 @@ $contenidoPrincipal .= <<<EOS
             <button class="rechazar-intercambio" onclick="window.location.href='catalogo.php'">Cancelar intercambio</button>
         </div>
         </section> 
-    </main> 
 EOS; 
 
 require __DIR__.'/includes/vistas/plantillas/plantilla.php';

@@ -26,7 +26,7 @@ class FormularioLogin extends Formulario
         <fieldset>
             <div class="input-group">
                 <label for="nombreUsuario">Usuario</label>
-                <input id="nombreUsuario" type="text" name="nombreUsuario" value="$nombreUsuario" required/>
+                <input id="nombreUsuario" type="text" name="nombreUsuario" value="$nombreUsuario" required>
                 {$erroresCampos['nombreUsuario']}
             </div>
 

@@ -18,9 +18,9 @@ define('BD_PASS', ''); // Vacío si no se configura contraseña
 
 define('RAIZ_APP', __DIR__);
 define('RUTA_APP', '/Grupo6_AW/proyecto/');
-define('RUTA_IMGS', RUTA_APP.'/img/');
-define('RUTA_CSS', RUTA_APP.'/CSS/');
-define('RUTA_JS', RUTA_APP.'/js/');
+define('RUTA_IMGS', RUTA_APP.'img');
+define('RUTA_CSS', RUTA_APP.'CSS');
+define('RUTA_JS', RUTA_APP.'js');
 
 
 /**

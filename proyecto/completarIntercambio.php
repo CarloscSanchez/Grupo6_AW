@@ -61,7 +61,6 @@ $contenidoPrincipal=<<<EOS
         <h2>Fecha: {$fecha}</h2>
     </header>
     
-    <main>
         <!-- Sección del libro solicitado -->
         <section class="libro-solicitado">
             <h2>Libro Solicitado</h2>
@@ -94,7 +93,6 @@ $contenidoPrincipal=<<<EOS
             <button class="rechazar-intercambio" onclick="window.location.href='includes/clases/intercambios/cambiarEstadoIntercambio.php?id={$intercambio->getId()}&estado=cancelado'">Cancelar intercambio</button> 
         </div>
         </section>
-    </main> 
 EOS; 
 
 

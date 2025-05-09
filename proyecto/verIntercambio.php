@@ -57,7 +57,6 @@ $contenidoPrincipal=<<<EOS
         <h2>Fecha: {$fecha}</h2>
     </header>
     
-    <main>
         <!-- Sección del libro solicitado -->
         <section class="libro-solicitado">
             <h2>Libro Solicitado</h2>
@@ -81,7 +80,6 @@ if(!$libroOfrecido){
     $contenidoPrincipal .=<<<EOS
             <h3>El intercambio fue rechazado</h3>
             </section>
-        </main> 
     EOS;
 }
 else{
@@ -96,7 +94,6 @@ $contenidoPrincipal .=<<<EOS
                 </div>
             </div>
         </section>
-    </main> 
 EOS; 
 }
 

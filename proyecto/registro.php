@@ -22,8 +22,8 @@ $contenidoPrincipal = <<<EOS
         </div>
     </div>
 
-    <script type="text/javascript" src="JS/jquery-3.7.1.min.js"></script>
-    <script type="text/javascript" src="JS/validarRegistro.js"></script>
+    <script  src="JS/jquery-3.7.1.min.js"></script>
+    <script  src="JS/validarRegistro.js"></script>
 
 EOS;
 

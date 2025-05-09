@@ -274,6 +274,16 @@ class Usuario
         return $this->roles;
     }
 
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+    }
+    public function setCorreo($correo)
+    {
+        $this->correo = $correo;
+    }
+    
+
     public function tieneRol($role)
     {
         // if ($this->roles == null) {
