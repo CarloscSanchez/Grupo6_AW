@@ -1,8 +1,21 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+require_once __DIR__ . '/../../config.php';
+
+use \includes\clases\usuarios\usuario;
+
+$imagenPerfil = null;
+
+if (isset($_SESSION['nombre'])) {
+    $usuario =Usuario::buscaUsuario($_SESSION['nombre']);
+    if ($usuario) {
+        $imagenPerfil = $usuario->getUrlImagen() ?? "img/perfil_default.png";
+    }
 }
+
+$imagenPerfil = htmlspecialchars($imagenPerfil);
 ?>
+
+
 <div class="navbar">
     <!-- Sección izquierda: Logo + Nombre de la app -->
     <div class="navbar-left">
@@ -21,7 +34,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <?php else: ?>
             <!-- Si el usuario está logueado, muestra LogOut y el ícono del perfil -->
             <a href="perfil.php" class="nav-item">
-                <img src="img/logo5_AW.jpg" alt="Perfil" class="profile-icon">
+                <img src="<?=$imagenPerfil?>" alt="Perfil" class="profile-icon">
             </a>
             <a href="includes/clases/usuarios/procesarLogout.php" class="nav-item">Log Out</a>
         <?php endif; ?>
