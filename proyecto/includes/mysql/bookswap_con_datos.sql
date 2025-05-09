@@ -79,6 +79,7 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(256) NOT NULL,
   `correo` varchar(256) NOT NULL,
   `contraseña` varchar(256) NOT NULL,
+  `imagen` varchar(256) DEFAULT NULL,
   `tipo` enum('admin','normal') NOT NULL DEFAULT 'normal'
 ) ;
 

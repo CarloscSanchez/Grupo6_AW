@@ -401,6 +401,34 @@ background-color: #e53935;
     background-color: #0056b3;
 }
 
+.btn-cambiarPerfil{
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-cambiarPerfil:hover {
+    background-color: #185826;
+}
+
+.btn-cancelarPerfil{
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-cancelarPerfil:hover {
+    background-color: #81151f;
+}
+
+
+
 .body-subirLibro {
     font-family: Arial, sans-serif;
     margin: 20px;

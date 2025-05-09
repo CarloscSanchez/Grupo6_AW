@@ -16,7 +16,6 @@ class Usuario
     {
         $usuario = self::buscaUsuario($nombreUsuario);
         if ($usuario && $usuario->compruebaPassword($password)) {
-            // return self::cargaRoles($usuario);
             return $usuario;
         }
         return false;
@@ -25,7 +24,6 @@ class Usuario
     public static function crea($nombreUsuario, $password, $correo, $rol)
     {
         $user = new Usuario($nombreUsuario, self::hashPassword($password), $correo, $rol);
-        // $user->añadeRol($rol);
         return $user->guarda();
     }
 
@@ -38,7 +36,7 @@ class Usuario
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Usuario($fila['nombre'], $fila['contraseña'], $fila['correo'], $fila['idusuario'], $fila['tipo']);
+                $result = new Usuario($fila['nombre'], $fila['contraseña'], $fila['correo'], $fila['idusuario'],  $fila['imagen'], $fila['tipo']);
             }
             $rs->free();
         } else {
@@ -56,7 +54,7 @@ class Usuario
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Usuario($fila['nombre'], $fila['contraseña'], $fila['correo'], $fila['idusuario'], $fila['tipo']);
+                $result = new Usuario($fila['nombre'], $fila['contraseña'], $fila['correo'], $fila['idusuario'], $fila['imagen'], $fila['tipo']);
             }
             $rs->free();
         } else {
@@ -74,7 +72,7 @@ class Usuario
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Usuario($fila['nombre'], $fila['contraseña'], $fila['correo'], $fila['idusuario']);
+                $result = new Usuario($fila['nombre'], $fila['contraseña'], $fila['correo'], $fila['idusuario'], $fila['imagen'], $fila['tipo']);
             }
             $rs->free();
         } else {
@@ -91,7 +89,7 @@ class Usuario
         $result = [];
         if ($rs) {
             while ($fila = $rs->fetch_assoc()) {
-                $result[] = new Usuario($fila['nombre'], $fila['contraseña'], $fila['correo'], $fila['idusuario']);
+                $result[] = new Usuario($fila['nombre'], $fila['contraseña'], $fila['correo'], $fila['idusuario'], $fila['imagen'], $fila['tipo']);
             }
             $rs->free();
         } else {
@@ -165,26 +163,27 @@ class Usuario
         return $usuario;
     }
     
-    private static function actualiza($usuario)
+    public static function actualiza($usuario)
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE usuarios U SET nombre = '%s', correo='%s', contraseña='%s' WHERE U.idusuario=%d"
-            , $conn->real_escape_string($usuario->nombre)
-            , $conn->real_escape_string($usuario->correo)
-            , $conn->real_escape_string($usuario->password)
-            , $usuario->idusuario
+        $query = "UPDATE usuarios SET nombre=?, correo=?, contraseña=?, imagen=? WHERE idusuario=?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param(
+            "ssssi",
+            $usuario->nombre,
+            $usuario->correo,
+            $usuario->password,
+            $usuario->urlImagen,
+            $usuario->idusuario
         );
-        if ( $conn->query($query) ) {
+        if ($stmt->execute()) {
             $result = $usuario;
-            // $result = self::borraRoles($usuario);
-            // if ($result) {
-            //     $result = self::insertaRoles($usuario);
-            // }
+            $stmt->close();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }
-        
+
         return $result;
     }
    
@@ -235,12 +234,13 @@ class Usuario
 
     private $roles;
 
-    private function __construct($nombre, $password, $correo, $id = null, $roles = [])
+    private function __construct($nombre, $password, $correo, $id = null, $url=null, $roles = [])
     {
         $this->idusuario = $id;
         $this->nombre = $nombre;
         $this->password = $password;
         $this->correo = $correo;
+        $this->urlImagen = $url;
         $this->roles = is_array($roles) ? $roles : [$roles]; 
     }
 
@@ -264,6 +264,11 @@ class Usuario
         return $this->correo;
     }
 
+    public function getUrlImagen()
+    {
+        return $this->urlImagen;
+    }
+
     public function añadeRol($role)
     {
         $this->roles[] = $role;
@@ -281,6 +286,10 @@ class Usuario
     public function setCorreo($correo)
     {
         $this->correo = $correo;
+    }
+    public function setUrlImagen($url)
+    {
+        $this->urlImagen = $url;
     }
     
 
