@@ -141,10 +141,9 @@ class Filtro extends Formulario
                 $where = "WHERE disponible = 1";
             }
         }
-
-
+ 
         // Construir la consulta SQL
-        $sql = "SELECT * FROM libros 
+        $sql = "SELECT nombre, idlibro, titulo, autor, genero, editorial, idioma, estado, descripcion, libros.imagen, idpropietario, disponible, fecha_publicacion FROM libros 
                 LEFT JOIN usuarios ON usuarios.idusuario = libros.idpropietario 
                 $where";
         $stmt = $conn->prepare($sql);
