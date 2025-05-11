@@ -916,9 +916,6 @@ background-color: #e53935;
     gap: 20px;
     padding: 10px;
 }
-.carousel::-webkit-scrollbar {
-    display: none;
-}
 .evento {
     min-width: 250px;
     flex: 0 0 auto;
