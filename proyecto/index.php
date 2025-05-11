@@ -1,12 +1,12 @@
 <?php
 //Inicio del procesamiento
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/clases/productos/evento.php'; // Incluye la clase Evento
 
+use \includes\clases\productos\evento as Evento;
 $tituloPagina = 'BookSwap';
 
 // Obtener los próximos eventos desde la base de datos
-$eventos = \includes\clases\productos\Evento::getEventos();
+$eventos = Evento::getEventos();
 $eventosHtml = '';
 
 if ($eventos) {

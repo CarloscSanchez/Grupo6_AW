@@ -5,7 +5,7 @@ namespace includes\clases\productos;
 use \includes\formulario as Formulario;
 use \includes\clases\productos\libro as Libro;
 
-use includes\clases\usuarios\Usuario;
+use includes\clases\usuarios\usuario;
 
 class FormularioSubirLibro extends Formulario
 {

@@ -2,7 +2,7 @@
 require __DIR__.'/includes/config.php';
 
 use \includes\aplicacion as Aplicacion;
-use \includes\clases\productos\Libro as Libro;
+use \includes\clases\productos\libro as Libro;
 use \includes\clases\usuarios\usuario as Usuario;
 use \includes\clases\intercambios\intercambio as Intercambio;
 

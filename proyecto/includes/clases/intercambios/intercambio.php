@@ -3,7 +3,7 @@
 namespace includes\clases\intercambios;
 
 use \includes\aplicacion as Aplicacion;
-use \includes\clases\productos\Libro as Libro;
+use \includes\clases\productos\libro as Libro;
 
 class Intercambio
 {

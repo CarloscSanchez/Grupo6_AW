@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../config.php';
 
-use includes\clases\productos\Evento;
+use includes\clases\productos\evento;
 
 $idEvento = $_GET['id'] ?? null;
 

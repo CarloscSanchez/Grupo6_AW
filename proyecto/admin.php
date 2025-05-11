@@ -2,7 +2,7 @@
 require_once __DIR__.'/includes/config.php';
 
 use \includes\clases\productos\libro as Libro;
-use \includes\clases\productos\Evento as Evento;
+use \includes\clases\productos\evento as Evento;
 use \includes\clases\usuarios\usuario as Usuario;
 
 // Verificar si el usuario es un administrador

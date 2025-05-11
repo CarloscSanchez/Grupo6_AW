@@ -23,6 +23,7 @@ if (!$usuario) {
 $nombreUsuario = $usuario->getNombre();
 $fotoPerfil = $usuario->getUrlImagen() ?? "img/perfil_default.png";
 
+
 // Cargar los libros del usuario
 $libros_publicados = Libro::cargaLibrosUsuario($usuario->getId());
 
@@ -34,7 +35,7 @@ $contenidoPrincipal = <<<EOS
 
         <!-- Foto de perfil y botón para cambiarla -->
         <div class='foto-perfil'>
-            <img src=$fotoPerfil alt='Foto de perfil'>
+            <img src="$fotoPerfil" alt='Foto de perfil'>
             <p class='nombre-usuario'>$nombreUsuario</p>
             <button onclick="window.location.href='editarPerfil.php'">Editar Perfil</button>        
         </div>

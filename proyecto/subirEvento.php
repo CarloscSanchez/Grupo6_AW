@@ -4,7 +4,7 @@ require_once __DIR__.'/includes/config.php';
 require_once __DIR__ . '/includes/clases/productos/formularioCrearEvento.php'; 
 
 
-use \includes\clases\productos\FormularioCrearEvento;
+use \includes\clases\productos\formularioCrearEvento;
 
 $form = new FormularioCrearEvento();
 $htmlFormCrearEvento = $form->gestiona();

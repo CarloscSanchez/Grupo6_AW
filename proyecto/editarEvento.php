@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/includes/config.php';
 
-use \includes\clases\productos\FormularioEditarEvento as FormularioEditarEvento;
+use \includes\clases\productos\formularioEditarEvento as FormularioEditarEvento;
 
 $form = new FormularioEditarEvento();
 $htmlFormEditarEvento = $form->gestiona();
