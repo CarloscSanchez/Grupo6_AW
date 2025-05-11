@@ -70,6 +70,7 @@ class Intercambio
         $stmt->bind_param("i", $idintercambio);
         $stmt->execute();
         $resultado = $stmt->get_result();
+        $stmt->close();
 
         if ($fila = $resultado->fetch_assoc()) {
             return new Intercambio(
@@ -82,6 +83,7 @@ class Intercambio
                 $fila['id_libro_ofrecido']
             );
         }
+        $resultado->free(); // Liberar memoria
         return false;
     }
 
@@ -93,6 +95,7 @@ class Intercambio
         $stmt->bind_param("i", $id_usuario);
         $stmt->execute();
         $resultado = $stmt->get_result();
+        $stmt->close();
         $intercambios = [];
 
         while ($fila = $resultado->fetch_assoc()) {
@@ -106,6 +109,7 @@ class Intercambio
                 $fila['id_libro_ofrecido']
             );
         }
+        $resultado->free(); // Liberar memoria
         return $intercambios;
     }
 
@@ -131,6 +135,7 @@ class Intercambio
                 $fila['id_libro_ofrecido']
             );
         }
+        $resultado->free(); // Liberar memoria
         return $intercambios;
     }
 
@@ -156,6 +161,7 @@ class Intercambio
                 $fila['id_libro_ofrecido']
             );
         }
+        $resultado->free(); // Liberar memoria
         return $intercambios;
     }
 

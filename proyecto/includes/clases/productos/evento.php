@@ -48,7 +48,7 @@ class Evento
                 $fila['idevento']
             );
         }
-
+        $result->free();
         $stmt->close();
         return $eventos;
     }
@@ -62,6 +62,7 @@ class Evento
         $stmt->execute();
         $result = $stmt->get_result();
         $fila = $result->fetch_assoc();
+        $result->free();
         $stmt->close();
 
         if ($fila) {
@@ -84,6 +85,7 @@ class Evento
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $idevento);
         $resultado = $stmt->execute();
+        $resultado->free();
         $stmt->close();
         return $resultado;
     }
@@ -103,6 +105,7 @@ class Evento
             $evento->idevento
         );
         $resultado = $stmt->execute();
+        $resultado->free();
         $stmt->close();
         return $resultado;
     }
