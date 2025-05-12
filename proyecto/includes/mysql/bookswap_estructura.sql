@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 07-03-2025 a las 16:54:37
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Servidor: vm007.db.swarm.test
+-- Tiempo de generación: 12-05-2025 a las 09:03:54
+-- Versión del servidor: 10.4.28-MariaDB-1:10.4.28+maria~ubu2004
+-- Versión de PHP: 8.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `eventos`
+--
+
+CREATE TABLE `eventos` (
+  `idevento` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  `lugar` varchar(255) NOT NULL,
+  `genero` varchar(100) DEFAULT NULL
+) ;
+
+
+--
 -- Estructura de tabla para la tabla `intercambios`
 --
 
@@ -35,9 +49,8 @@ CREATE TABLE `intercambios` (
   `id_propietario` int(11) NOT NULL,
   `estado` enum('pendiente','aceptado','rechazado','completado','cancelado') NOT NULL DEFAULT 'pendiente',
   `fecha_intercambio` date DEFAULT NULL
-) ;
+);
 
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `libros`
@@ -56,9 +69,8 @@ CREATE TABLE `libros` (
   `idpropietario` int(11) NOT NULL,
   `disponible` tinyint(4) NOT NULL DEFAULT 1,
   `fecha_publicacion` date NOT NULL DEFAULT current_timestamp()
-) ;
+);
 
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuarios`
@@ -69,29 +81,20 @@ CREATE TABLE `usuarios` (
   `nombre` varchar(256) NOT NULL,
   `correo` varchar(256) NOT NULL,
   `contraseña` varchar(256) NOT NULL,
-  `imagen` varchar(256) default NULL,
+  `imagen` varchar(256) DEFAULT NULL,
   `tipo` enum('admin','normal') NOT NULL DEFAULT 'normal'
 ) ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `eventos`
---
-
-CREATE TABLE eventos (
-    idevento INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    fecha DATE NOT NULL,
-    hora TIME NOT NULL,
-    lugar VARCHAR(255) NOT NULL,
-    genero VARCHAR(100)
-);
 
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  ADD PRIMARY KEY (`idevento`);
 
 --
 -- Indices de la tabla `intercambios`
@@ -119,6 +122,12 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  MODIFY `idevento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `intercambios`
